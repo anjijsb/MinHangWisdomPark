@@ -205,6 +205,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="dist\css\AdminLTE.css" />
     <Content Include="dist\css\AdminLTE.min.css" />
+    <Content Include="dist\css\font-awesome.min.css" />
+    <Content Include="dist\css\ionicons.min.css" />
     <Content Include="dist\css\skins\skin-black-light.css" />
     <Content Include="dist\css\skins\skin-black-light.min.css" />
     <Content Include="dist\css\skins\skin-black.css" />
@@ -260,8 +262,11 @@
     <Content Include="dist\js\app.js" />
     <Content Include="dist\js\app.min.js" />
     <Content Include="dist\js\demo.js" />
+    <Content Include="dist\js\jquery-ui.min.js" />
+    <Content Include="dist\js\moment.min.js" />
     <Content Include="dist\js\pages\dashboard.js" />
     <Content Include="dist\js\pages\dashboard2.js" />
+    <Content Include="dist\js\raphael-min.js" />
     <Content Include="documentation\build\include\adminlte-options.html" />
     <Content Include="documentation\build\include\advice.html" />
     <Content Include="documentation\build\include\browsers.html" />
@@ -366,6 +371,26 @@
     <Content Include="build\less\timeline.less" />
     <Content Include="build\less\users-list.less" />
     <Content Include="build\less\variables.less" />
+    <Content Include="img\1.png" />
+    <Content Include="img\1346470593_6324.png" />
+    <Content Include="img\2.png" />
+    <Content Include="img\3.png" />
+    <Content Include="img\8.png" />
+    <Content Include="img\img01.jpg" />
+    <Content Include="img\IMG02.jpg" />
+    <Content Include="img\img03.jpg" />
+    <Content Include="img\img04.jpg" />
+    <Content Include="img\main.jpg" />
+    <Content Include="img\NewFolder1\01.jpg" />
+    <Content Include="img\NewFolder1\02.jpg" />
+    <Content Include="img\NewFolder1\03.jpg" />
+    <Content Include="img\NewFolder1\04.jpg" />
+    <Content Include="img\NewFolder1\05.jpg" />
+    <Content Include="img\NewFolder1\06.jpg" />
+    <Content Include="img\NewFolder1\06.png" />
+    <Content Include="img\NewFolder1\07.jpg" />
+    <Content Include="img\NewFolder1\07.png" />
+    <Content Include="img\weixin.jpg" />
     <Content Include="plugins\ckeditor\CHANGES.md" />
     <Content Include="plugins\ckeditor\LICENSE.md" />
     <Content Include="plugins\ckeditor\plugins\scayt\LICENSE.md" />
@@ -1148,6 +1173,11 @@
     <Content Include="Views\BusinessApplication\Enterprise.cshtml" />
     <Content Include="Views\BusinessApplication\Visitor.cshtml" />
     <Content Include="Views\DataQuery\Revenue.cshtml" />
+    <Content Include="Views\Main\Main.cshtml" />
+    <Content Include="Views\Shared\_ch.cshtml" />
+    <Content Include="Views\Main\login.cshtml" />
+    <Content Include="Views\Main\LunTan.cshtml" />
+    <Content Include="Views\Main\RuKou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
