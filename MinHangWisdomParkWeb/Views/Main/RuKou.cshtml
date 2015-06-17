@@ -1,5 +1,6 @@
 ﻿@{
-    Layout = null;
+    ViewBag.Title = "入口";
+    Layout = "~/Views/Shared/_ch.cshtml";
 }
 
 <!DOCTYPE html>
@@ -9,11 +10,11 @@
     <meta name="viewport" content="width=device-width" />
     <title>RuKou</title>
     <style type="text/css">
-        .imgweixin {
+        .imgjiagou {
             position: fixed;
-            top: 10%;
-            left: 40%;
-            height: 80%;
+            top: 5%;
+            height: 90%;
+            left: 15%;
             display: none;
         }
 
@@ -60,16 +61,131 @@
             top: 6.5%;
             display: none;
         }
+
+        .modal-dialog {
+            width: 80%;
+        }
+
+            .modal-dialog .modal-body {
+                text-align: center;
+            }
+
+        .btn-group .dropdown-menu {
+            width: 100%;
+            text-align: center;
+        }
+
+        .wxbg {
+            position: fixed;
+            top: 10%;
+            left: 40%;
+            height: 80%;
+            display: none;
+        }
+
+        .wxsh {
+            position: absolute;
+            top: 15%;
+            left: 10%;
+            width: 50px;
+            height: 30px;
+            display: none;
+        }
+
+        .wxzuo {
+            position: absolute;
+            bottom: 8%;
+            left: 20%;
+            width: 70px;
+            height: 40px;
+            z-index: 99;
+        }
+
+        .wxzh {
+            position: absolute;
+            bottom: 8%;
+            left: 44%;
+            width: 70px;
+            height: 40px;
+            z-index: 99;
+        }
+
+        .wxyou {
+            position: absolute;
+            bottom: 8%;
+            left: 68%;
+            width: 70px;
+            height: 40px;
+            z-index: 99;
+        }
+
+        .btn {
+            border: none;
+            border-radius: initial;
+        }
+
+        .quan {
+            width: 310px;
+            height: 150px;
+            margin: 5px;
+        }
+
+        .ban {
+            width: 150px;
+            height: 150px;
+            margin: 5px;
+            padding: 0;
+        }
+
+        .quan, .ban {
+            font-size: 30px;
+            color: white;
+        }
+
+            .quan, :hover, .ban:hover {
+                color: white;
+            }
+
+        .btn-default {
+            background-color: #ccc;
+        }
+
+        .imgdzkb {
+            position: fixed;
+            width: 70%;
+            top: 2%;
+            left: 15%;
+            display: none;
+        }
+
+        .divbody {
+            text-align: center;
+            position: fixed;
+            left: 60%;
+            top: 5%;
+        }
     </style>
 </head>
+
 <body>
-    <div style="text-align:center;">
-        <button style="width:200px;height:100px;margin-bottom:20px;">门户</button><br />
-        <button style="width:200px;height:100px;margin-bottom:20px;">后台</button><br />
-        <button style="width:200px;height:100px;margin-bottom:20px;">APP</button><br />
-        <button style="width:200px;height:100px;margin-bottom:20px;">微信</button><br />
+    <div class="divbody">
+        <button class="btn btn-default quan">门户</button><br />
+        <button class="btn btn-primary ban" data-toggle="modal" data-target="#myModal">后台</button>
+        <button class="btn btn-success ban">APP</button><br />
+        <button class="btn btn-info quan">微信</button><br />
+        <button class="btn btn-warning ban">架构</button>
+        <button class="btn btn-default ban">电子看板</button><br />
     </div>
-    <img src="~/img/weixin.jpg" class="imgweixin" />
+    <div class="wxbg">
+        <img src="~/img/weixin.jpg" class="imgweixin" />
+        <div class="wxsh"></div>
+        <div class="wxzuo err" tg="02"></div>
+        <div class="wxzh err" tg="03"></div>
+        <div class="wxyou err" tg="04"></div>
+    </div>
+    <img src="~/img/NewFolder2/jiagou.jpg" class="imgjiagou" />
+    <img src="~/img/dzkb.jpg" class="imgdzkb" />
+    @*app*@
     <div class="app">
         <img src="~/img/NewFolder1/01.jpg" />
         <div class="shang"></div>
@@ -79,6 +195,58 @@
         <div class="shen er"></div>
         <div class="xiang er"></div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">证卡后台管理</h4>
+                </div>
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            信息采集
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#" tg="01">人员信息采集</a></li>
+                            <li><a href="#" tg="02">车辆信息采集</a></li>
+                            <li><a href="#" tg="03">物品信息采集</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            系统设定
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#" tg="04">业主信息设定</a></li>
+                            <li><a href="#" tg="05">用户信息设定</a></li>
+                            <li><a href="#" tg="06">权限配置设定</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            证卡管理
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#" tg="07">电子标签登录</a></li>
+                            <li><a href="#" tg="08">证卡分发</a></li>
+                            <li><a href="#" tg="09">挂失补办</a></li>
+                            <li><a href="#" tg="10">证卡报废</a></li>
+                            <li><a href="#" tg="11">证卡信息查询</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <img src="~/img/NewFolder2/01.JPG" class="modal-body-img" />
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
 <script src="~/Scripts/jquery-1.8.2.js"></script>
@@ -87,12 +255,26 @@
         var str = $(this).html();
         if (str == "门户") {
             location.href = "../../main/main";
-        } else if (str == "后台") {
-            location.href = "../../main/index";
         } else if (str == "微信") {
-            $(".imgweixin").show().click(function () {
-                $(this).hide();
+            $(".wxbg").show().click(function () {
+                $(".imgweixin").click(function () {
+                    if ($(this).parent().children().eq(0).attr("src") == "/img/weixin.jpg" || $(this).parent().children().eq(0).attr("src") == "../../img/weixin.jpg") {
+                        $(this).parent().hide();
+                    }
+                })
+
             })
+
+            $(".wxbg").find("div").click(function () {
+                var str = $(this).attr("tg");
+                $(this).parent().children().eq(0).attr("src", "../../img/weixin" + str + ".png");
+                $(this).parent().find(".err").hide();
+                $(".wxsh").show().click(function () {
+                    $(this).parent().children().eq(0).attr("src", "../../img/weixin.jpg");
+                    $(this).hide().parent().children().show();
+                })
+            })
+
         } else if (str == "APP") {
             $(".app").show().children().click(function () {
                 var str = $(this).attr("class");
@@ -111,13 +293,25 @@
                     })
                 }
             })
+        } else if (str == "架构") {
+            $(".imgjiagou").show().click(function () {
+                $(this).hide();
+            })
+        } else if (str == "电子看板") {
+            $(".imgdzkb").show().click(function () {
+                $(this).hide();
+            })
         }
     })
+
     $(".guan").click(function () {
         $(this).parent().hide();
         $(this).parent().children().eq(0).attr("src", "../../img/NewFolder1/01.jpg");
         $(this).parent().children(".er").hide();
     })
-
-
+    //后台
+    $("#myModal").find("a").click(function () {
+        var tg = $(this).attr("tg");
+        $(".modal-body-img").attr("src", "../../img/NewFolder2/" + tg + ".JPG");
+    })
 </script>
