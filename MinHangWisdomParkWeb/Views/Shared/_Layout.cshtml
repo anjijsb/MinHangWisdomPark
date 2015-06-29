@@ -4,8 +4,9 @@
     <meta charset="utf-8" />
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <title>@ViewBag.Title</title>
-
-
+    <!-- jQuery 2.1.4 -->
+    <script src="@Url.Content("~/plugins/jQuery/jQuery-2.1.4.min.js")"></script>
+    <script src=@Url.Content("~/Scripts/jquery-form.js")></script>
     <link href="@Url.Content("~/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
     <!-- FontAwesome 4.3.0 -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -30,8 +31,7 @@
     <link href="@Url.Content("~/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")" rel="stylesheet" type="text/css" />
 
 
-    <!-- jQuery 2.1.4 -->
-    <script src="@Url.Content("~/plugins/jQuery/jQuery-2.1.4.min.js")"></script>
+
     <!-- jQuery UI 1.11.4 -->
     <script src="@Url.Content("~/dist/js/jquery-ui.min.js")" type="text/javascript"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -69,8 +69,6 @@
 
     <!-- AdminLTE for demo purposes -->
     <script src="@Url.Content("~/dist/js/demo.js")" type="text/javascript"></script>
-
-
 </head>
 <body class="skin-blue sidebar-mini">
     <div class="wrapper">
@@ -150,73 +148,26 @@
                 </form>
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
+                <ul class="sidebar-menu" id="main">
                     <li class="header">菜单</li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i>
-                            <span>信息发布管理</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="/InformationDelivery/News"><i class="fa fa-circle-o"></i> 新闻信息发布管理</a></li>
-                            <li><a href="/InformationDelivery/Park"><i class="fa fa-circle-o"></i> 园区信息发布管理</a></li>
-                            <li><a href="/InformationDelivery/Advertisement"><i class="fa fa-circle-o"></i> 广告信息发布管理</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-files-o"></i>
-                            <span>授权审核管理</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="/AuthorizationAudit/Park"><i class="fa fa-circle-o"></i> 园区项目审核授权</a></li>
-                            <li><a href="/AuthorizationAudit/Personnel"><i class="fa fa-circle-o"></i> 人员入园申请授权</a></li>
-                            <li><a href="/AuthorizationAudit/Car"><i class="fa fa-circle-o"></i> 车辆入园申请授权</a></li>
-                            <li><a href="/AuthorizationAudit/Temporary"><i class="fa fa-circle-o"></i> 临时访问授权审核</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>系统权限管理</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="/SystemAuthority/Function"><i class="fa fa-circle-o"></i> 角色管理</a></li>
-                            <li><a href="/SystemAuthority/Data"><i class="fa fa-circle-o"></i> 树型层级限定</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="/Main/LunTan">
-                            <i class="fa fa-th"></i> <span>网络社区管理</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>运营数据统计</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="/OperatingIncome/Card"><i class="fa fa-circle-o"></i> 运营收入</a></li>
-                            <li><a href="/OperatingIncome/Advertisement"><i class="fa fa-circle-o"></i> 流量监控</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-edit"></i>
-                            <span>业务在线申请</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="/BusinessApplication/Company"><i class="fa fa-circle-o"></i> 车辆申请</a></li>
-                            <li><a href="/BusinessApplication/Enterprise"><i class="fa fa-circle-o"></i> 人员申请</a></li>
-                            <li><a href="/BusinessApplication/Visitor"><i class="fa fa-circle-o"></i> 访客业务申请/查询</a></li>
-                        </ul>
-                    </li>
+                    @{
+                        foreach (MinHangWisdomParkWeb.Controllers.Menus i in MinHangWisdomParkWeb.Helps.MenuList())
+                        {
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-dashboard"></i>
+                                    <span>@i.FunctionName</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @foreach (var a in i.FunctionList)
+                                    {
+                                        <li><a href="/@a.Type/Index?Type=@a.FunctionID&Title=@a.FunctionName"><i class="fa fa-circle-o"></i> @a.FunctionName</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                    }
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -224,13 +175,12 @@
         <div class="content-wrapper">
             <!-- Content Wrapper. Contains page content -->
             <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <h1>
+            <section class="content-header text-center">
+                <h1 style="margin-bottom:0.5em;">
                     @ViewBag.Title
                 </h1>
             </section>
             @RenderBody()
-
         </div>
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
@@ -238,7 +188,6 @@
             </div>
             <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
         </footer>
-
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Create the tabs -->
@@ -407,3 +356,4 @@
         <div class='control-sidebar-bg'></div>
     </div>
 </body>
+</html>

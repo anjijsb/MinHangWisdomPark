@@ -9,12 +9,16 @@
     <meta name="viewport" content="width=device-width" />
     <title>闵行智慧园区</title>
     <style type="text/css">
+        .imgdiv{
+            position:relative;
+        }
         .login {
-            width: 100px;
+            width: 300px;
             height: 40px;
             position: absolute;
             top: 25%;
-            right: 23%;
+            right: 0%;
+            background-color: red;
         }
     </style>
 </head>
@@ -27,6 +31,10 @@
 </html>
 <script src="~/Scripts/jquery-1.8.2.js"></script>
 <script type="text/javascript">
+    $(function () {
+        $(".imgdiv").attr("width", $(".imgdiv").children().eq(0).width())
+        $(".imgdiv").attr("height", $(".imgdiv").children().eq(0).height())
+    })
     $(".login").click(function () {
         location.href = "../../Main/Login/";
     })

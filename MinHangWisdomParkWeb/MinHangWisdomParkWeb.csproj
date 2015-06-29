@@ -44,6 +44,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -131,6 +133,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthorizationAuditController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BusinessApplicationController.cs" />
     <Compile Include="Controllers\DataQueryController.cs" />
     <Compile Include="Controllers\InformationDeliveryController.cs" />
@@ -139,6 +142,89 @@
     <Compile Include="Controllers\SystemAuthorityController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helps.cs" />
+    <Compile Include="Models\ajIIPdb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ajIIPdb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ajIIPdb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ajIIPdb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ajIIPdb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Functions.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GlobalParameter.cs" />
+    <Compile Include="Models\mtFunction.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mtOwner.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mtPower.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mtRegistrant.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mtRfidCode.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mtUniversalCode.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mtUser.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mtUserPower.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbApplyBill.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbBuniess.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbCar.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbConfirmState.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbFiles.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbIORecord.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbOwnerRfid.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbPeblish.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbPeople.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbProduct.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbReceive.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbRepair.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTempInOut.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -377,6 +463,7 @@
     <Content Include="img\3.png" />
     <Content Include="img\8.png" />
     <Content Include="img\dzkb.jpg" />
+    <Content Include="img\gyy.jpg" />
     <Content Include="img\img01.jpg" />
     <Content Include="img\IMG02.jpg" />
     <Content Include="img\img03.jpg" />
@@ -407,6 +494,16 @@
     <Content Include="img\weixin02.png" />
     <Content Include="img\weixin03.png" />
     <Content Include="img\weixin04.png" />
+    <Content Include="Models\ajIIPdb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ajIIPdb.edmx</DependentUpon>
+      <LastGenOutput>ajIIPdb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ajIIPdb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ajIIPdb.edmx</DependentUpon>
+      <LastGenOutput>ajIIPdb.cs</LastGenOutput>
+    </Content>
     <Content Include="plugins\ckeditor\CHANGES.md" />
     <Content Include="plugins\ckeditor\LICENSE.md" />
     <Content Include="plugins\ckeditor\plugins\scayt\LICENSE.md" />
@@ -427,6 +524,13 @@
     <Content Include="plugins\datatables\extensions\TableTools\Readme.md" />
     <Content Include="plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="plugins\input-mask\phone-codes\phone-codes.json" />
+    <EntityDeploy Include="Models\ajIIPdb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ajIIPdb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ajIIPdb.edmx.diagram">
+      <DependentUpon>ajIIPdb.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="plugins\bootstrap-slider\slider.css" />
@@ -1149,6 +1253,7 @@
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-form.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -1160,6 +1265,7 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\MyAjaxFrom.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -1194,13 +1300,17 @@
     <Content Include="Views\Main\login.cshtml" />
     <Content Include="Views\Main\LunTan.cshtml" />
     <Content Include="Views\Main\RuKou.cshtml" />
+    <Content Include="Views\InformationDelivery\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

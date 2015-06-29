@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace MinHangWisdomParkWeb.Controllers
 {
-    public class MainController : Controller
+    public class MainController : BaseController
     {
-        //
-        // GET: /Main/
+
 
         public ActionResult Index()
         {
             return View();
         }
-
 
         /// <summary>
         /// 官网
@@ -54,4 +53,13 @@ namespace MinHangWisdomParkWeb.Controllers
             return View();
         }
     }
+
+    #region 模型
+    public class Menus : Models.Functions
+    {
+        public List<Models.Functions> FunctionList { get; set; }
+    }
+
+    #endregion
+
 }

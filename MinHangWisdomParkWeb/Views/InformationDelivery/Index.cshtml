@@ -1,0 +1,130 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .row {
+        margin-bottom: 0.5em;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <input type="text" class="form-control" id="PeblishType" placeholder="发布类型">
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <input type="text" class="form-control" id="PeblishTitle" placeholder="发布标题">
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <textarea class="form-control" id="PublishContent" rows="6" placeholder="发布内容"></textarea>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 text-center">
+        <button class="btn btn-info" type="button" id="imgUpload">文件上传</button>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="row" id="imgzhanshi"></div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+<div style="display:none;">
+    <form action="/InformationDelivery/UpLoadPhoto" method="POST" enctype="multipart/form-data" name="ImgForm" id="ImgForm">
+        <input type="file" name="file" id="imgFlie" required="required" />
+        <input type="submit" name="subt" value="上传图片" />
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 text-center">
+        <button type="button" id="btnzong" class="btn btn-info">确认提交</button>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+<script type="text/javascript">
+    //上传图片
+    $("#imgUpload").click(function () {
+        if ($("#imgzhanshi").children().length >= 3) {
+            alert("上传图片数量最大3张！")
+            return false;
+        }
+        $("#imgFlie").click();
+        var stm1 = setInterval(function () {
+            var imgstr = $("#imgFlie").val();
+            if (imgstr != "") {
+                clearInterval(stm1);
+                $("#ImgForm input[type='submit']").click();
+            }
+        }, 500);
+        return false;
+    });
+
+    
+    $('#ImgForm').ajaxForm({
+        beforeSend: function () {
+
+        },
+        success: function (data) {
+            if (data.imgUrl != "") {
+                var str = '<div class="alert col-xs-6 col-md-3" role="alert" imgid="' + data.imgId + '"><button type="button" onclick="xxx(\'' + data.imgUrl + '\')" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><a href="#" class="thumbnail"><img src="' + data.imgUrl + '" alt="..."></a></div>';
+                $('#imgzhanshi').append(str);
+
+
+            } else {
+                alerTips(data.ErrorInfo);
+            }
+
+        }, complete: function (xhr) {
+            $("#imgFlie").val("");
+        }
+    });
+
+
+    function xxx(e) {
+        $.post("DeleteFiles", { url: e }, function (data, stauts) {
+        })
+    }
+
+
+    //提交数据
+    $("#btnzong").click(function () {
+        var PeblishType = $("#PeblishType").val();
+        var PeblishTitle = $("#PeblishTitle").val();
+        var PublishContent = $("#PublishContent").val();
+        var PublishImg = [];
+        $("#imgzhanshi").children().each(function () {
+            var id = $(this).attr("imgid");
+            PublishImg.push(id);
+        })
+
+        if (PeblishType == "" || PeblishTitle == "" || PublishContent == "") {
+            alert("类型 标题 内容必须填写！");
+            return false;
+        }
+
+        $.post("InsertPeblishApply", { PeblishType: PeblishType, PeblishTitle: PeblishTitle, PublishContent: PublishContent, PublishImg: { 0: PublishImg[0], 1: PublishImg[1], 2: PublishImg[2] } }, function () {
+
+
+        })
+
+    })
+
+
+</script>
