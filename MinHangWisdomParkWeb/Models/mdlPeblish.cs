@@ -12,16 +12,13 @@ namespace MinHangWisdomParkWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class mtUser
+    public partial class mdlPeblish
     {
-        public string UserId { get; set; }
-        public string UserName { get; set; }
-        public Nullable<int> OwnerId { get; set; }
-        public Nullable<bool> IsDel { get; set; }
-        public Nullable<System.DateTime> CreateTime { get; set; }
-        public Nullable<System.DateTime> UpdateTime { get; set; }
-        public string UserParentId { get; set; }
-    
-        public virtual mtOwner mtOwner { get; set; }
+        public int PeblishID { get; set; }
+        public string PeblishType { get; set; }
+        public string PeblishTitle { get; set; }
+        public string PeblishContent { get; set; }
+        public string FileIDs { get; set; }
+        public string Updater { get; set; }
     }
 }

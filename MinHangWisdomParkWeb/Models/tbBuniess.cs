@@ -17,7 +17,7 @@ namespace MinHangWisdomParkWeb.Models
         public int ApplyID { get; set; }
         public string BuniessType { get; set; }
         public string BuniessContent { get; set; }
-        public Nullable<bool> IsCompleted { get; set; }
+        public Nullable<int> IsCompleted { get; set; }
         public string Updater { get; set; }
         public string ClientIP { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }

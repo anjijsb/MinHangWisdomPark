@@ -4,33 +4,38 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2d3e5dd514a64ae7a297b08a5ef86a52" Name="Diagram1">
+      <Diagram DiagramId="2d3e5dd514a64ae7a297b08a5ef86a52" Name="Diagram1" ZoomLevel="111">
         <EntityTypeShape EntityType="ajIIPdbModel.Functions" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.mtFunction" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.mtOwner" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.mtPower" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.mtRfidCode" Width="1.5" PointX="3.75" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ajIIPdbModel.mtUniversalCode" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ajIIPdbModel.mtUniversalCode" Width="1.5" PointX="7.875" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.mtUser" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.mtUserPower" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ajIIPdbModel.tbApplyBill" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ajIIPdbModel.tbBuniess" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ajIIPdbModel.tbBuniess" Width="1.5" PointX="10.5" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.tbCar" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ajIIPdbModel.tbConfirmState" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.tbFiles" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.tbIORecord" Width="1.5" PointX="6" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.tbOwnerRfid" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ajIIPdbModel.tbPeblish" Width="1.5" PointX="4.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.tbPeople" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.tbProduct" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.tbReceive" Width="1.5" PointX="6.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ajIIPdbModel.tbRepair" Width="1.5" PointX="12.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ajIIPdbModel.tbTempInOut" Width="1.5" PointX="8.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.mtRegistrant" Width="1.5" PointX="10.75" PointY="12.75" IsExpanded="true" />
         <AssociationConnector Association="ajIIPdbModel.FK_mtUser_mtOwner" ManuallyRouted="false" />
         <AssociationConnector Association="ajIIPdbModel.FK_tbOwnerRfid_mtOwner" ManuallyRouted="false" />
         <AssociationConnector Association="ajIIPdbModel.FK_tbIORecord_mtRfidCode" ManuallyRouted="false" />
         <AssociationConnector Association="ajIIPdbModel.FK_tbOwnerRfid_mtRfidCode" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ajIIPdbModel.tbCheckInOut" Width="1.5" PointX="13.375" PointY="12.75" />
+        <EntityTypeShape EntityType="ajIIPdbModel.tbCheckInOuts" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="ajIIPdbModel.mtConfirmFlow" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ajIIPdbModel.mtConfirmLevel" Width="1.5" PointX="15.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ajIIPdbModel.mdlPeblish" Width="1.5" PointX="15.375" PointY="6.75" />
+        <EntityTypeShape EntityType="ajIIPdbModel.tbApplyBill" Width="1.5" PointX="8.5" PointY="9.375" />
+        <EntityTypeShape EntityType="ajIIPdbModel.tbPeblish" Width="1.5" PointX="3.375" PointY="14.75" />
+        <EntityTypeShape EntityType="ajIIPdbModel.tbConfirmState" Width="1.5" PointX="10.75" PointY="16" />
+        <AssociationConnector Association="ajIIPdbModel.FK_tbConfirmState_tbApplyBill" />
+        <EntityTypeShape EntityType="ajIIPdbModel.tbRepair" Width="1.5" PointX="11.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

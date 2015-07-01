@@ -12,16 +12,16 @@ namespace MinHangWisdomParkWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class mtUser
+    public partial class tbCheckInOut
     {
-        public string UserId { get; set; }
-        public string UserName { get; set; }
-        public Nullable<int> OwnerId { get; set; }
-        public Nullable<bool> IsDel { get; set; }
+        public string CheckID { get; set; }
+        public int Version { get; set; }
+        public string CheckTitle { get; set; }
+        public string CheckContent { get; set; }
+        public Nullable<int> StateCode { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
-        public string UserParentId { get; set; }
-    
-        public virtual mtOwner mtOwner { get; set; }
+        public Nullable<int> InOutFlag { get; set; }
+        public string InOutType { get; set; }
     }
 }

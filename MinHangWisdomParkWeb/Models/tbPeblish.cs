@@ -14,13 +14,11 @@ namespace MinHangWisdomParkWeb.Models
     
     public partial class tbPeblish
     {
-        public int ApplyID { get; set; }
+        public string PeblishID { get; set; }
         public string PeblishType { get; set; }
         public string PeblishTitle { get; set; }
         public string PeblishContent { get; set; }
-        public Nullable<int> FileID1 { get; set; }
-        public Nullable<int> FileID2 { get; set; }
-        public Nullable<int> FileID3 { get; set; }
+        public string FileIDs { get; set; }
         public string Updater { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }

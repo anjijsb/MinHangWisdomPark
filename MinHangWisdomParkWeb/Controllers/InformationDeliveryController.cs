@@ -18,6 +18,8 @@ namespace MinHangWisdomParkWeb.Controllers
 
         Models.ajIIPdbEntities1 dal = new Models.ajIIPdbEntities1();
 
+        ApplyHelp applyhelp = new ApplyHelp();
+
         #endregion
 
         #region v0.1
@@ -50,29 +52,26 @@ namespace MinHangWisdomParkWeb.Controllers
 
         #endregion
 
-
         #region v0.2
 
         /// <summary>
-        /// 信息发布模板页面
+        /// 模板页面
         /// </summary>
         /// <param name="type">信息类型</param>
         /// <returns></returns>
         public ActionResult Index(string Type, string Title)
         {
-            ViewBag.Type = Type;
-            ViewBag.Title = Title;
+            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Title))
+            {
+                ViewBag.Type = Type.Replace("发布管理", "");
+                ViewBag.Title = Title;
+            }
             return View();
         }
 
 
-
-
-
-
         #region 图片上传
         [HttpPost]
-
         public JsonResult UpLoadPhoto(HttpPostedFileBase file)
         {
             var res = CheckImg(file);
@@ -118,12 +117,7 @@ namespace MinHangWisdomParkWeb.Controllers
             {
                 strerror = res;
             }
-
-
-
-            InsertFiles(imgurl, imgname);
-
-            var Result = new { ErrorInfo = strerror, imgUrl = imgurl, imgId = SelectFilesId(imgurl).ToString() };
+            var Result = new { ErrorInfo = strerror, imgUrl = imgurl, imgId = InsertFiles(imgurl, imgname).ToString() };
 
 
             return Json(Result, JsonRequestBehavior.AllowGet);
@@ -168,21 +162,24 @@ namespace MinHangWisdomParkWeb.Controllers
 
 
         #region 功能
+
         /// <summary>
         /// 插入files表
         /// </summary>
         /// <param name="url"></param>
-        public void InsertFiles(string url, string name)
+        public int InsertFiles(string url, string name)
         {
             try
             {
-                dal.tbFiles.Add(new MinHangWisdomParkWeb.Models.tbFiles
+                MinHangWisdomParkWeb.Models.tbFiles file = new MinHangWisdomParkWeb.Models.tbFiles
                 {
                     FileType = "img",
                     FilePath = url,
                     FileName = name
-                });
+                };
+                dal.tbFiles.Add(file);
                 dal.SaveChanges();
+                return file.FileID;
             }
             catch (Exception e)
             {
@@ -193,7 +190,7 @@ namespace MinHangWisdomParkWeb.Controllers
 
 
         /// <summary>
-        /// 删除files表数据
+        /// 删除files表数据及文件
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
@@ -203,6 +200,7 @@ namespace MinHangWisdomParkWeb.Controllers
             {
                 dal.tbFiles.Remove(dal.tbFiles.FirstOrDefault(m => m.FilePath == url));
                 dal.SaveChanges();
+                FileHelper.DeleteFile(Server.MapPath(url));
             }
             catch (Exception)
             {
@@ -213,70 +211,76 @@ namespace MinHangWisdomParkWeb.Controllers
         }
 
         /// <summary>
-        /// 查找ID
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        public int SelectFilesId(string url)
-        {
-            try
-            {
-                return dal.tbFiles.FirstOrDefault(m => m.FilePath == url).FileID;
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-
-        /// <summary>
-        /// 插入
+        /// 插入数据
         /// </summary>
         /// <param name="PeblishType"></param>
         /// <param name="PeblishTitle"></param>
         /// <param name="PublishContent"></param>
         /// <param name="PublishImg"></param>
-        public void InsertPeblishApply(string PeblishType, string PeblishTitle, string PublishContent, string[] PublishImg)
+        public JsonResult InsertPeblishApply(string PeblishType, string PeblishTitle, string PublishContent, string[] PublishImg)
         {
+            try
+            {
+                applyhelp.InsertApplyBill(InsertPeblish(PeblishType, PeblishTitle, PublishContent, PublishImg), "Peblish");
+                return Json(new { msg = "ok" });
+            }
+            catch (Exception)
+            {
+                return Json(new { msg = "no" });
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// 插入peblish数据并返回插入数据ID
+        /// </summary>
+        /// <param name="PeblishType"></param>
+        /// <param name="PeblishTitle"></param>
+        /// <param name="PublishContent"></param>
+        /// <param name="PublishImg"></param>
+        /// <returns></returns>
+        private string InsertPeblish(string PeblishType, string PeblishTitle, string PublishContent, string[] PublishImg)
+        {
+
             try
             {
                 MinHangWisdomParkWeb.Models.tbPeblish peblish = new MinHangWisdomParkWeb.Models.tbPeblish
                 {
+                    PeblishID = (int.Parse((dal.tbPeblish.Max(m => m.PeblishID) == null ? "0" : dal.tbPeblish.Max(m => m.PeblishID))) + 1).ToString().PadLeft(12, '0'),
                     PeblishType = PeblishType,
                     PeblishTitle = PeblishTitle,
                     PeblishContent = PublishContent,
                     Updater = GlobalParameter.UserName,
-                    CreateTime = DateTime.Now
+                    CreateTime = DateTime.Now,
+                    UpdateTime = DateTime.Now
                 };
-                switch (PublishImg.Length)
+                if (PublishImg != null)
                 {
-                    case 0: ; break;
-                    case 1: peblish.FileID1 = int.Parse(PublishImg[0]); goto case 0;
-                    case 2: peblish.FileID2 = int.Parse(PublishImg[1]); goto case 1;
-                    case 3: peblish.FileID3 = int.Parse(PublishImg[2]); goto case 2;
+                    peblish.FileIDs = string.Join(",", PublishImg);
                 }
-
                 dal.tbPeblish.Add(peblish);
                 dal.SaveChanges();
+                return peblish.PeblishID;
             }
             catch (Exception)
             {
 
                 throw;
             }
-
-
         }
 
 
+
+        #endregion
+
+
+
         #endregion
 
 
-
-        #endregion
 
     }
+
+
 }

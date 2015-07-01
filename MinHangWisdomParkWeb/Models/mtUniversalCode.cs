@@ -17,5 +17,6 @@ namespace MinHangWisdomParkWeb.Models
         public string UniversalType { get; set; }
         public int CodeID { get; set; }
         public string CodeName { get; set; }
+        public string CodeEn { get; set; }
     }
 }

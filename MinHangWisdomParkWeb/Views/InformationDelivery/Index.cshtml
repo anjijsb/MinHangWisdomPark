@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-        <input type="text" class="form-control" id="PeblishType" placeholder="发布类型">
+        <input type="text" class="form-control" id="PeblishType" placeholder="发布类型" value="@ViewBag.Type" readonly="readonly">
     </div>
     <div class="col-md-2"></div>
 </div>
@@ -76,7 +76,6 @@
         return false;
     });
 
-    
     $('#ImgForm').ajaxForm({
         beforeSend: function () {
 
@@ -115,15 +114,19 @@
         })
 
         if (PeblishType == "" || PeblishTitle == "" || PublishContent == "") {
-            alert("类型 标题 内容必须填写！");
+            alert("标题 内容必须填写！");
             return false;
-        }
+        } 
 
-        $.post("InsertPeblishApply", { PeblishType: PeblishType, PeblishTitle: PeblishTitle, PublishContent: PublishContent, PublishImg: { 0: PublishImg[0], 1: PublishImg[1], 2: PublishImg[2] } }, function () {
-
-
+        $.post("InsertPeblishApply", { PeblishType: PeblishType, PeblishTitle: PeblishTitle, PublishContent: PublishContent, PublishImg: { 0: PublishImg[0], 1: PublishImg[1], 2: PublishImg[2] } },function (data, stauts) {
+            if (stauts == "success") {
+                if (data.msg == "ok") {
+                    alert("提交成功");
+                } else {
+                    alert("提交失败！");
+                }
+            }
         })
-
     })
 
 

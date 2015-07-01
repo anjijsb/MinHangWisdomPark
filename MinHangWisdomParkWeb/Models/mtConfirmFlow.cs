@@ -12,16 +12,10 @@ namespace MinHangWisdomParkWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class mtUser
+    public partial class mtConfirmFlow
     {
+        public int ConfirmerAutoID { get; set; }
+        public int ConfirmerLevelID { get; set; }
         public string UserId { get; set; }
-        public string UserName { get; set; }
-        public Nullable<int> OwnerId { get; set; }
-        public Nullable<bool> IsDel { get; set; }
-        public Nullable<System.DateTime> CreateTime { get; set; }
-        public Nullable<System.DateTime> UpdateTime { get; set; }
-        public string UserParentId { get; set; }
-    
-        public virtual mtOwner mtOwner { get; set; }
     }
 }

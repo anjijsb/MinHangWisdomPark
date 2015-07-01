@@ -128,6 +128,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helps\ApplyHelp.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -140,10 +141,11 @@
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\OperatingIncomeController.cs" />
     <Compile Include="Controllers\SystemAuthorityController.cs" />
+    <Compile Include="Enumeration\Enumerations.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helps.cs" />
+    <Compile Include="Helps\Helps.cs" />
     <Compile Include="Models\ajIIPdb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -163,6 +165,15 @@
       <DependentUpon>ajIIPdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GlobalParameter.cs" />
+    <Compile Include="Models\mdlPeblish.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mtConfirmFlow.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mtConfirmLevel.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\mtFunction.cs">
       <DependentUpon>ajIIPdb.tt</DependentUpon>
     </Compile>
@@ -196,6 +207,12 @@
     <Compile Include="Models\tbCar.cs">
       <DependentUpon>ajIIPdb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbCheckInOut.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbCheckInOuts.cs">
+      <DependentUpon>ajIIPdb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbConfirmState.cs">
       <DependentUpon>ajIIPdb.tt</DependentUpon>
     </Compile>
@@ -221,9 +238,6 @@
       <DependentUpon>ajIIPdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbRepair.cs">
-      <DependentUpon>ajIIPdb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbTempInOut.cs">
       <DependentUpon>ajIIPdb.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1291,9 +1305,6 @@
     <Content Include="Views\OperatingIncome\Card.cshtml" />
     <Content Include="Views\OperatingIncome\Advertisement.cshtml" />
     <Content Include="Views\OperatingIncome\Service.cshtml" />
-    <Content Include="Views\BusinessApplication\Company.cshtml" />
-    <Content Include="Views\BusinessApplication\Enterprise.cshtml" />
-    <Content Include="Views\BusinessApplication\Visitor.cshtml" />
     <Content Include="Views\DataQuery\Revenue.cshtml" />
     <Content Include="Views\Main\Main.cshtml" />
     <Content Include="Views\Shared\_ch.cshtml" />
@@ -1301,6 +1312,11 @@
     <Content Include="Views\Main\LunTan.cshtml" />
     <Content Include="Views\Main\RuKou.cshtml" />
     <Content Include="Views\InformationDelivery\Index.cshtml" />
+    <Content Include="Views\BusinessApplication\Index.cshtml" />
+    <Content Include="Views\BusinessApplication\Repair.cshtml" />
+    <Content Include="Views\BusinessApplication\ApplyState.cshtml" />
+    <Content Include="Views\BusinessApplication\CarsAndItems.cshtml" />
+    <Content Include="Views\AuthorizationAudit\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

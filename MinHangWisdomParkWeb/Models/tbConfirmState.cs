@@ -17,13 +17,13 @@ namespace MinHangWisdomParkWeb.Models
         public int ApplyID { get; set; }
         public Nullable<int> CurrConfirmLevel { get; set; }
         public Nullable<int> NeedConfirmLevel { get; set; }
-        public string ConfirmerID1 { get; set; }
-        public Nullable<System.DateTime> ConfirmerDate1 { get; set; }
-        public string ConfirmerID2 { get; set; }
-        public Nullable<System.DateTime> ConfirmerDate2 { get; set; }
-        public string ConfirmerID3 { get; set; }
-        public Nullable<System.DateTime> ConfirmerDate3 { get; set; }
+        public string ConfirmerID { get; set; }
+        public Nullable<System.DateTime> ConfirmerDate { get; set; }
+        public string ConfirmeMemo { get; set; }
+        public Nullable<int> ConfirmerAutoID { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
+    
+        public virtual tbApplyBill tbApplyBill { get; set; }
     }
 }

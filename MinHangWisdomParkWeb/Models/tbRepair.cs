@@ -15,7 +15,7 @@ namespace MinHangWisdomParkWeb.Models
     public partial class tbRepair
     {
         public string RepairID { get; set; }
-        public string RepairType { get; set; }
+        public Nullable<int> RepairType { get; set; }
         public string RepairTitle { get; set; }
         public string RepairContent { get; set; }
         public Nullable<int> StateCode { get; set; }

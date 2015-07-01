@@ -12,14 +12,9 @@ namespace MinHangWisdomParkWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbTempInOut
+    public partial class mtConfirmLevel
     {
-        public string TempID { get; set; }
-        public int Version { get; set; }
-        public string TempTitle { get; set; }
-        public string TempContent { get; set; }
-        public Nullable<int> StateCode { get; set; }
-        public Nullable<System.DateTime> CreateTime { get; set; }
-        public Nullable<System.DateTime> UpdateTime { get; set; }
+        public int ConfirmLevelID { get; set; }
+        public string ConfirmLevelName { get; set; }
     }
 }

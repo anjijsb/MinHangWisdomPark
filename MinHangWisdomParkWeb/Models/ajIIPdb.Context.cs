@@ -36,20 +36,24 @@ namespace MinHangWisdomParkWeb.Models
         public DbSet<mtUniversalCode> mtUniversalCode { get; set; }
         public DbSet<mtUser> mtUser { get; set; }
         public DbSet<mtUserPower> mtUserPower { get; set; }
-        public DbSet<tbApplyBill> tbApplyBill { get; set; }
         public DbSet<tbBuniess> tbBuniess { get; set; }
         public DbSet<tbCar> tbCar { get; set; }
-        public DbSet<tbConfirmState> tbConfirmState { get; set; }
         public DbSet<tbFiles> tbFiles { get; set; }
         public DbSet<tbIORecord> tbIORecord { get; set; }
         public DbSet<tbOwnerRfid> tbOwnerRfid { get; set; }
-        public DbSet<tbPeblish> tbPeblish { get; set; }
         public DbSet<tbPeople> tbPeople { get; set; }
         public DbSet<tbProduct> tbProduct { get; set; }
         public DbSet<tbReceive> tbReceive { get; set; }
-        public DbSet<tbRepair> tbRepair { get; set; }
-        public DbSet<tbTempInOut> tbTempInOut { get; set; }
         public DbSet<mtRegistrant> mtRegistrant { get; set; }
+        public DbSet<tbCheckInOut> tbCheckInOut { get; set; }
+        public DbSet<tbCheckInOuts> tbCheckInOuts { get; set; }
+        public DbSet<mtConfirmFlow> mtConfirmFlow { get; set; }
+        public DbSet<mtConfirmLevel> mtConfirmLevel { get; set; }
+        public DbSet<mdlPeblish> mdlPeblish { get; set; }
+        public DbSet<tbApplyBill> tbApplyBill { get; set; }
+        public DbSet<tbPeblish> tbPeblish { get; set; }
+        public DbSet<tbConfirmState> tbConfirmState { get; set; }
+        public DbSet<tbRepair> tbRepair { get; set; }
     
         public virtual int Proc_RegistrantID(string registrantType)
         {

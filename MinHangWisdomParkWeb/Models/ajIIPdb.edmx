@@ -15,6 +15,23 @@
           <Property Name="MasterMenu" Type="bit" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="mtConfirmFlow">
+          <Key>
+            <PropertyRef Name="ConfirmerAutoID" />
+            <PropertyRef Name="ConfirmerLevelID" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ConfirmerAutoID" Type="int" Nullable="false" />
+          <Property Name="ConfirmerLevelID" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mtConfirmLevel">
+          <Key>
+            <PropertyRef Name="ConfirmLevelID" />
+          </Key>
+          <Property Name="ConfirmLevelID" Type="int" Nullable="false" />
+          <Property Name="ConfirmLevelName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="mtFunction">
           <Key>
             <PropertyRef Name="FuncNo" />
@@ -73,6 +90,7 @@
           <Property Name="UniversalType" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CodeID" Type="int" Nullable="false" />
           <Property Name="CodeName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CodeEn" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="mtUser">
           <Key>
@@ -80,6 +98,7 @@
           </Key>
           <Property Name="UserId" Type="nvarchar" MaxLength="12" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserParentId" Type="nvarchar" MaxLength="12" />
           <Property Name="OwnerId" Type="int" />
           <Property Name="IsDel" Type="bit" />
           <Property Name="CreateTime" Type="datetime" />
@@ -99,10 +118,11 @@
           <Key>
             <PropertyRef Name="ApplyID" />
           </Key>
-          <Property Name="ApplyID" Type="int" Nullable="false" />
+          <Property Name="ApplyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ApplyType" Type="nvarchar" MaxLength="50" />
           <Property Name="ObjectID" Type="nvarchar" MaxLength="20" />
           <Property Name="ApplyDate" Type="datetime" />
+          <Property Name="Updater" Type="nvarchar" MaxLength="12" />
         </EntityType>
         <EntityType Name="tbBuniess">
           <Key>
@@ -111,7 +131,7 @@
           <Property Name="ApplyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BuniessType" Type="nvarchar" MaxLength="20" />
           <Property Name="BuniessContent" Type="nvarchar" MaxLength="1000" />
-          <Property Name="IsCompleted" Type="bit" />
+          <Property Name="IsCompleted" Type="int" />
           <Property Name="Updater" Type="nvarchar" MaxLength="20" />
           <Property Name="ClientIP" Type="nvarchar" MaxLength="20" />
           <Property Name="CreateTime" Type="datetime" />
@@ -134,6 +154,37 @@
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="UpdateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbCheckInOut">
+          <Key>
+            <PropertyRef Name="CheckID" />
+            <PropertyRef Name="Version" />
+          </Key>
+          <Property Name="CheckID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Version" Type="int" Nullable="false" />
+          <Property Name="InOutFlag" Type="int" />
+          <Property Name="InOutType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CheckTitle" Type="nvarchar" MaxLength="255" />
+          <Property Name="CheckContent" Type="nvarchar" MaxLength="1000" />
+          <Property Name="StateCode" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbCheckInOuts">
+          <Key>
+            <PropertyRef Name="CheckID" />
+            <PropertyRef Name="Version" />
+            <PropertyRef Name="SortNo" />
+          </Key>
+          <Property Name="CheckID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Version" Type="int" Nullable="false" />
+          <Property Name="SortNo" Type="int" Nullable="false" />
+          <Property Name="UseType" Type="nvarchar" MaxLength="20" />
+          <Property Name="ObjectId" Type="nvarchar" MaxLength="12" />
+          <Property Name="ObjectVersion" Type="int" />
+          <Property Name="Memo" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbConfirmState">
           <Key>
             <PropertyRef Name="ApplyID" />
@@ -141,12 +192,10 @@
           <Property Name="ApplyID" Type="int" Nullable="false" />
           <Property Name="CurrConfirmLevel" Type="int" />
           <Property Name="NeedConfirmLevel" Type="int" />
-          <Property Name="ConfirmerID1" Type="nvarchar" MaxLength="20" />
-          <Property Name="ConfirmerDate1" Type="datetime" />
-          <Property Name="ConfirmerID2" Type="nvarchar" MaxLength="20" />
-          <Property Name="ConfirmerDate2" Type="datetime" />
-          <Property Name="ConfirmerID3" Type="nvarchar" MaxLength="20" />
-          <Property Name="ConfirmerDate3" Type="datetime" />
+          <Property Name="ConfirmerID" Type="nvarchar" MaxLength="20" />
+          <Property Name="ConfirmerDate" Type="datetime" />
+          <Property Name="ConfirmeMemo" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ConfirmerAutoID" Type="int" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="UpdateTime" Type="datetime" />
         </EntityType>
@@ -186,15 +235,13 @@
         </EntityType>
         <EntityType Name="tbPeblish">
           <Key>
-            <PropertyRef Name="ApplyID" />
+            <PropertyRef Name="PeblishID" />
           </Key>
-          <Property Name="ApplyID" Type="int" Nullable="false" />
+          <Property Name="PeblishID" Type="varchar" MaxLength="12" Nullable="false" />
           <Property Name="PeblishType" Type="nvarchar" MaxLength="20" />
           <Property Name="PeblishTitle" Type="nvarchar" MaxLength="255" />
           <Property Name="PeblishContent" Type="nvarchar" MaxLength="1000" />
-          <Property Name="FileID1" Type="int" />
-          <Property Name="FileID2" Type="int" />
-          <Property Name="FileID3" Type="int" />
+          <Property Name="FileIDs" Type="nvarchar" MaxLength="255" />
           <Property Name="Updater" Type="nvarchar" MaxLength="20" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="UpdateTime" Type="datetime" />
@@ -252,25 +299,25 @@
             <PropertyRef Name="RepairID" />
           </Key>
           <Property Name="RepairID" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="RepairType" Type="nvarchar" MaxLength="50" />
+          <Property Name="RepairType" Type="int" />
           <Property Name="RepairTitle" Type="nvarchar" MaxLength="255" />
           <Property Name="RepairContent" Type="nvarchar" MaxLength="1000" />
           <Property Name="StateCode" Type="int" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="UpdateTime" Type="datetime" />
         </EntityType>
-        <EntityType Name="tbTempInOut">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“ajIIPdb.dbo.mdlPeblish”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="mdlPeblish">
           <Key>
-            <PropertyRef Name="TempID" />
-            <PropertyRef Name="Version" />
+            <PropertyRef Name="PeblishID" />
           </Key>
-          <Property Name="TempID" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Version" Type="int" Nullable="false" />
-          <Property Name="TempTitle" Type="nvarchar" MaxLength="255" />
-          <Property Name="TempContent" Type="nvarchar" MaxLength="1000" />
-          <Property Name="StateCode" Type="int" />
-          <Property Name="CreateTime" Type="datetime" />
-          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="PeblishID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PeblishType" Type="nvarchar" MaxLength="20" />
+          <Property Name="PeblishTitle" Type="nvarchar" MaxLength="255" />
+          <Property Name="PeblishContent" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FileIDs" Type="nvarchar" MaxLength="255" />
+          <Property Name="Updater" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <Association Name="FK_mtUser_mtOwner">
           <End Role="mtOwner" Type="Self.mtOwner" Multiplicity="0..1" />
@@ -281,6 +328,18 @@
             </Principal>
             <Dependent Role="mtUser">
               <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbConfirmState_tbApplyBill">
+          <End Role="tbApplyBill" Type="Self.tbApplyBill" Multiplicity="1" />
+          <End Role="tbConfirmState" Type="Self.tbConfirmState" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbApplyBill">
+              <PropertyRef Name="ApplyID" />
+            </Principal>
+            <Dependent Role="tbConfirmState">
+              <PropertyRef Name="ApplyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -329,6 +388,8 @@
         </Function>
         <EntityContainer Name="ajIIPdbModelStoreContainer">
           <EntitySet Name="Functions" EntityType="Self.Functions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mtConfirmFlow" EntityType="Self.mtConfirmFlow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mtConfirmLevel" EntityType="Self.mtConfirmLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mtFunction" EntityType="Self.mtFunction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mtOwner" EntityType="Self.mtOwner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mtPower" EntityType="Self.mtPower" Schema="dbo" store:Type="Tables" />
@@ -340,6 +401,8 @@
           <EntitySet Name="tbApplyBill" EntityType="Self.tbApplyBill" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbBuniess" EntityType="Self.tbBuniess" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbCar" EntityType="Self.tbCar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCheckInOut" EntityType="Self.tbCheckInOut" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCheckInOuts" EntityType="Self.tbCheckInOuts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbConfirmState" EntityType="Self.tbConfirmState" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbFiles" EntityType="Self.tbFiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbIORecord" EntityType="Self.tbIORecord" Schema="dbo" store:Type="Tables" />
@@ -349,10 +412,23 @@
           <EntitySet Name="tbProduct" EntityType="Self.tbProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbReceive" EntityType="Self.tbReceive" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbRepair" EntityType="Self.tbRepair" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tbTempInOut" EntityType="Self.tbTempInOut" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mdlPeblish" EntityType="Self.mdlPeblish" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[mdlPeblish].[PeblishID] AS [PeblishID], 
+[mdlPeblish].[PeblishType] AS [PeblishType], 
+[mdlPeblish].[PeblishTitle] AS [PeblishTitle], 
+[mdlPeblish].[PeblishContent] AS [PeblishContent], 
+[mdlPeblish].[FileIDs] AS [FileIDs], 
+[mdlPeblish].[Updater] AS [Updater]
+FROM [dbo].[mdlPeblish] AS [mdlPeblish]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_mtUser_mtOwner" Association="Self.FK_mtUser_mtOwner">
             <End Role="mtOwner" EntitySet="mtOwner" />
             <End Role="mtUser" EntitySet="mtUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbConfirmState_tbApplyBill" Association="Self.FK_tbConfirmState_tbApplyBill">
+            <End Role="tbApplyBill" EntitySet="tbApplyBill" />
+            <End Role="tbConfirmState" EntitySet="tbConfirmState" />
           </AssociationSet>
           <AssociationSet Name="FK_tbIORecord_mtRfidCode" Association="Self.FK_tbIORecord_mtRfidCode">
             <End Role="mtRfidCode" EntitySet="mtRfidCode" />
@@ -433,6 +509,7 @@
           <Property Name="UniversalType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CodeID" Type="Int32" Nullable="false" />
           <Property Name="CodeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CodeEn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="mtUser">
           <Key>
@@ -445,6 +522,7 @@
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="mtOwner" Relationship="Self.FK_mtUser_mtOwner" FromRole="mtUser" ToRole="mtOwner" />
+          <Property Name="UserParentId" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="mtUserPower">
           <Key>
@@ -456,15 +534,6 @@
           <Property Name="FuncNo" Type="Int32" Nullable="false" />
           <Property Name="PowerId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="tbApplyBill">
-          <Key>
-            <PropertyRef Name="ApplyID" />
-          </Key>
-          <Property Name="ApplyID" Type="Int32" Nullable="false" />
-          <Property Name="ApplyType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ObjectID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ApplyDate" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="tbBuniess">
           <Key>
             <PropertyRef Name="ApplyID" />
@@ -472,7 +541,7 @@
           <Property Name="ApplyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BuniessType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="BuniessContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="IsCompleted" Type="Boolean" />
+          <Property Name="IsCompleted" Type="Int32" />
           <Property Name="Updater" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ClientIP" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
@@ -492,22 +561,6 @@
           <Property Name="MinWeight" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ExpDate" Type="DateTime" Precision="3" />
           <Property Name="OwnerId" Type="Int32" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="tbConfirmState">
-          <Key>
-            <PropertyRef Name="ApplyID" />
-          </Key>
-          <Property Name="ApplyID" Type="Int32" Nullable="false" />
-          <Property Name="CurrConfirmLevel" Type="Int32" />
-          <Property Name="NeedConfirmLevel" Type="Int32" />
-          <Property Name="ConfirmerID1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ConfirmerDate1" Type="DateTime" Precision="3" />
-          <Property Name="ConfirmerID2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ConfirmerDate2" Type="DateTime" Precision="3" />
-          <Property Name="ConfirmerID3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ConfirmerDate3" Type="DateTime" Precision="3" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
         </EntityType>
@@ -547,21 +600,6 @@
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="mtOwner" Relationship="Self.FK_tbOwnerRfid_mtOwner" FromRole="tbOwnerRfid" ToRole="mtOwner" />
           <NavigationProperty Name="mtRfidCode" Relationship="Self.FK_tbOwnerRfid_mtRfidCode" FromRole="tbOwnerRfid" ToRole="mtRfidCode" />
-        </EntityType>
-        <EntityType Name="tbPeblish">
-          <Key>
-            <PropertyRef Name="ApplyID" />
-          </Key>
-          <Property Name="ApplyID" Type="Int32" Nullable="false" />
-          <Property Name="PeblishType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="PeblishTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="PeblishContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="FileID1" Type="Int32" />
-          <Property Name="FileID2" Type="Int32" />
-          <Property Name="FileID3" Type="Int32" />
-          <Property Name="Updater" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="tbPeople">
           <Key>
@@ -608,31 +646,6 @@
           <Property Name="TurnoverMoney" Type="Decimal" Precision="21" Scale="4" />
           <Property Name="Updater" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="OwnerID" Type="Int32" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="tbRepair">
-          <Key>
-            <PropertyRef Name="RepairID" />
-          </Key>
-          <Property Name="RepairID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RepairType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RepairTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="RepairContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="StateCode" Type="Int32" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="tbTempInOut">
-          <Key>
-            <PropertyRef Name="TempID" />
-            <PropertyRef Name="Version" />
-          </Key>
-          <Property Name="TempID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Version" Type="Int32" Nullable="false" />
-          <Property Name="TempTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TempContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="StateCode" Type="Int32" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
         </EntityType>
@@ -703,19 +716,14 @@
           <EntitySet Name="mtUniversalCode" EntityType="Self.mtUniversalCode" />
           <EntitySet Name="mtUser" EntityType="Self.mtUser" />
           <EntitySet Name="mtUserPower" EntityType="Self.mtUserPower" />
-          <EntitySet Name="tbApplyBill" EntityType="Self.tbApplyBill" />
           <EntitySet Name="tbBuniess" EntityType="Self.tbBuniess" />
           <EntitySet Name="tbCar" EntityType="Self.tbCar" />
-          <EntitySet Name="tbConfirmState" EntityType="Self.tbConfirmState" />
           <EntitySet Name="tbFiles" EntityType="Self.tbFiles" />
           <EntitySet Name="tbIORecord" EntityType="Self.tbIORecord" />
           <EntitySet Name="tbOwnerRfid" EntityType="Self.tbOwnerRfid" />
-          <EntitySet Name="tbPeblish" EntityType="Self.tbPeblish" />
           <EntitySet Name="tbPeople" EntityType="Self.tbPeople" />
           <EntitySet Name="tbProduct" EntityType="Self.tbProduct" />
           <EntitySet Name="tbReceive" EntityType="Self.tbReceive" />
-          <EntitySet Name="tbRepair" EntityType="Self.tbRepair" />
-          <EntitySet Name="tbTempInOut" EntityType="Self.tbTempInOut" />
           <EntitySet Name="mtRegistrant" EntityType="Self.mtRegistrant" />
           <AssociationSet Name="FK_mtUser_mtOwner" Association="Self.FK_mtUser_mtOwner">
             <End Role="mtOwner" EntitySet="mtOwner" />
@@ -736,7 +744,142 @@
           <FunctionImport Name="Proc_RegistrantID">
           <Parameter Name="RegistrantType" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="tbCheckInOut" EntityType="ajIIPdbModel.tbCheckInOut" />
+          <EntitySet Name="tbCheckInOuts" EntityType="ajIIPdbModel.tbCheckInOuts" />
+          <EntitySet Name="mtConfirmFlow" EntityType="ajIIPdbModel.mtConfirmFlow" />
+          <EntitySet Name="mtConfirmLevel" EntityType="ajIIPdbModel.mtConfirmLevel" />
+          <EntitySet Name="mdlPeblish" EntityType="ajIIPdbModel.mdlPeblish" />
+          <EntitySet Name="tbApplyBill" EntityType="ajIIPdbModel.tbApplyBill" />
+          <EntitySet Name="tbPeblish" EntityType="ajIIPdbModel.tbPeblish" />
+          <EntitySet Name="tbConfirmState" EntityType="ajIIPdbModel.tbConfirmState" />
+          <AssociationSet Name="FK_tbConfirmState_tbApplyBill" Association="ajIIPdbModel.FK_tbConfirmState_tbApplyBill">
+            <End Role="tbApplyBill" EntitySet="tbApplyBill" />
+            <End Role="tbConfirmState" EntitySet="tbConfirmState" />
+          </AssociationSet>
+          <EntitySet Name="tbRepair" EntityType="ajIIPdbModel.tbRepair" />
         </EntityContainer>
+        <EntityType Name="tbCheckInOut">
+          <Key>
+            <PropertyRef Name="CheckID" />
+            <PropertyRef Name="Version" />
+          </Key>
+          <Property Name="CheckID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Version" Type="Int32" Nullable="false" />
+          <Property Name="CheckTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CheckContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="StateCode" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="InOutFlag" Type="Int32" />
+          <Property Name="InOutType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbCheckInOuts">
+          <Key>
+            <PropertyRef Name="CheckID" />
+            <PropertyRef Name="Version" />
+            <PropertyRef Name="SortNo" />
+          </Key>
+          <Property Name="CheckID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Version" Type="Int32" Nullable="false" />
+          <Property Name="SortNo" Type="Int32" Nullable="false" />
+          <Property Name="UseType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ObjectId" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="ObjectVersion" Type="Int32" />
+          <Property Name="Memo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="mtConfirmFlow">
+          <Key>
+            <PropertyRef Name="ConfirmerAutoID" />
+            <PropertyRef Name="ConfirmerLevelID" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ConfirmerAutoID" Type="Int32" Nullable="false" />
+          <Property Name="ConfirmerLevelID" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="mtConfirmLevel">
+          <Key>
+            <PropertyRef Name="ConfirmLevelID" />
+          </Key>
+          <Property Name="ConfirmLevelID" Type="Int32" Nullable="false" />
+          <Property Name="ConfirmLevelName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="mdlPeblish">
+          <Key>
+            <PropertyRef Name="PeblishID" />
+          </Key>
+          <Property Name="PeblishID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PeblishType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PeblishTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PeblishContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FileIDs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Updater" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbApplyBill">
+          <Key>
+            <PropertyRef Name="ApplyID" />
+          </Key>
+          <Property Name="ApplyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplyType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ObjectID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ApplyDate" Type="DateTime" Precision="3" />
+          <Property Name="Updater" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbConfirmState" Relationship="ajIIPdbModel.FK_tbConfirmState_tbApplyBill" FromRole="tbApplyBill" ToRole="tbConfirmState" />
+        </EntityType>
+        <EntityType Name="tbPeblish">
+          <Key>
+            <PropertyRef Name="PeblishID" />
+          </Key>
+          <Property Name="PeblishID" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="PeblishType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PeblishTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PeblishContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FileIDs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Updater" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbConfirmState">
+          <Key>
+            <PropertyRef Name="ApplyID" />
+          </Key>
+          <Property Name="ApplyID" Type="Int32" Nullable="false" />
+          <Property Name="CurrConfirmLevel" Type="Int32" />
+          <Property Name="NeedConfirmLevel" Type="Int32" />
+          <Property Name="ConfirmerID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ConfirmerDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmeMemo" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ConfirmerAutoID" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbApplyBill" Relationship="ajIIPdbModel.FK_tbConfirmState_tbApplyBill" FromRole="tbConfirmState" ToRole="tbApplyBill" />
+        </EntityType>
+        <Association Name="FK_tbConfirmState_tbApplyBill">
+          <End Type="ajIIPdbModel.tbApplyBill" Role="tbApplyBill" Multiplicity="1" />
+          <End Type="ajIIPdbModel.tbConfirmState" Role="tbConfirmState" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbApplyBill">
+              <PropertyRef Name="ApplyID" />
+            </Principal>
+            <Dependent Role="tbConfirmState">
+              <PropertyRef Name="ApplyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbRepair">
+          <Key>
+            <PropertyRef Name="RepairID" />
+          </Key>
+          <Property Name="RepairID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RepairType" Type="Int32" />
+          <Property Name="RepairTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RepairContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="StateCode" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -801,6 +944,7 @@
           <EntitySetMapping Name="mtUniversalCode">
             <EntityTypeMapping TypeName="ajIIPdbModel.mtUniversalCode">
               <MappingFragment StoreEntitySet="mtUniversalCode">
+                <ScalarProperty Name="CodeEn" ColumnName="CodeEn" />
                 <ScalarProperty Name="UniversalType" ColumnName="UniversalType" />
                 <ScalarProperty Name="CodeID" ColumnName="CodeID" />
                 <ScalarProperty Name="CodeName" ColumnName="CodeName" />
@@ -810,6 +954,7 @@
           <EntitySetMapping Name="mtUser">
             <EntityTypeMapping TypeName="ajIIPdbModel.mtUser">
               <MappingFragment StoreEntitySet="mtUser">
+                <ScalarProperty Name="UserParentId" ColumnName="UserParentId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
@@ -825,16 +970,6 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="FuncNo" ColumnName="FuncNo" />
                 <ScalarProperty Name="PowerId" ColumnName="PowerId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbApplyBill">
-            <EntityTypeMapping TypeName="ajIIPdbModel.tbApplyBill">
-              <MappingFragment StoreEntitySet="tbApplyBill">
-                <ScalarProperty Name="ApplyID" ColumnName="ApplyID" />
-                <ScalarProperty Name="ApplyType" ColumnName="ApplyType" />
-                <ScalarProperty Name="ObjectID" ColumnName="ObjectID" />
-                <ScalarProperty Name="ApplyDate" ColumnName="ApplyDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -864,23 +999,6 @@
                 <ScalarProperty Name="MinWeight" ColumnName="MinWeight" />
                 <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
                 <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbConfirmState">
-            <EntityTypeMapping TypeName="ajIIPdbModel.tbConfirmState">
-              <MappingFragment StoreEntitySet="tbConfirmState">
-                <ScalarProperty Name="ApplyID" ColumnName="ApplyID" />
-                <ScalarProperty Name="CurrConfirmLevel" ColumnName="CurrConfirmLevel" />
-                <ScalarProperty Name="NeedConfirmLevel" ColumnName="NeedConfirmLevel" />
-                <ScalarProperty Name="ConfirmerID1" ColumnName="ConfirmerID1" />
-                <ScalarProperty Name="ConfirmerDate1" ColumnName="ConfirmerDate1" />
-                <ScalarProperty Name="ConfirmerID2" ColumnName="ConfirmerID2" />
-                <ScalarProperty Name="ConfirmerDate2" ColumnName="ConfirmerDate2" />
-                <ScalarProperty Name="ConfirmerID3" ColumnName="ConfirmerID3" />
-                <ScalarProperty Name="ConfirmerDate3" ColumnName="ConfirmerDate3" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
               </MappingFragment>
@@ -918,22 +1036,6 @@
                 <ScalarProperty Name="UseType" ColumnName="UseType" />
                 <ScalarProperty Name="ObjectID" ColumnName="ObjectID" />
                 <ScalarProperty Name="ListType" ColumnName="ListType" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbPeblish">
-            <EntityTypeMapping TypeName="ajIIPdbModel.tbPeblish">
-              <MappingFragment StoreEntitySet="tbPeblish">
-                <ScalarProperty Name="ApplyID" ColumnName="ApplyID" />
-                <ScalarProperty Name="PeblishType" ColumnName="PeblishType" />
-                <ScalarProperty Name="PeblishTitle" ColumnName="PeblishTitle" />
-                <ScalarProperty Name="PeblishContent" ColumnName="PeblishContent" />
-                <ScalarProperty Name="FileID1" ColumnName="FileID1" />
-                <ScalarProperty Name="FileID2" ColumnName="FileID2" />
-                <ScalarProperty Name="FileID3" ColumnName="FileID3" />
-                <ScalarProperty Name="Updater" ColumnName="Updater" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
               </MappingFragment>
@@ -988,32 +1090,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbRepair">
-            <EntityTypeMapping TypeName="ajIIPdbModel.tbRepair">
-              <MappingFragment StoreEntitySet="tbRepair">
-                <ScalarProperty Name="RepairID" ColumnName="RepairID" />
-                <ScalarProperty Name="RepairType" ColumnName="RepairType" />
-                <ScalarProperty Name="RepairTitle" ColumnName="RepairTitle" />
-                <ScalarProperty Name="RepairContent" ColumnName="RepairContent" />
-                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbTempInOut">
-            <EntityTypeMapping TypeName="ajIIPdbModel.tbTempInOut">
-              <MappingFragment StoreEntitySet="tbTempInOut">
-                <ScalarProperty Name="TempID" ColumnName="TempID" />
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="TempTitle" ColumnName="TempTitle" />
-                <ScalarProperty Name="TempContent" ColumnName="TempContent" />
-                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="mtRegistrant">
             <EntityTypeMapping TypeName="ajIIPdbModel.mtRegistrant">
               <MappingFragment StoreEntitySet="mtRegistrant">
@@ -1026,6 +1102,118 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Proc_RegistrantID" FunctionName="ajIIPdbModel.Store.Proc_RegistrantID" />
+          <EntitySetMapping Name="tbCheckInOut">
+            <EntityTypeMapping TypeName="ajIIPdbModel.tbCheckInOut">
+              <MappingFragment StoreEntitySet="tbCheckInOut">
+                <ScalarProperty Name="InOutType" ColumnName="InOutType" />
+                <ScalarProperty Name="InOutFlag" ColumnName="InOutFlag" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="CheckContent" ColumnName="CheckContent" />
+                <ScalarProperty Name="CheckTitle" ColumnName="CheckTitle" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="CheckID" ColumnName="CheckID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCheckInOuts">
+            <EntityTypeMapping TypeName="ajIIPdbModel.tbCheckInOuts">
+              <MappingFragment StoreEntitySet="tbCheckInOuts">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="ObjectVersion" ColumnName="ObjectVersion" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="UseType" ColumnName="UseType" />
+                <ScalarProperty Name="SortNo" ColumnName="SortNo" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="CheckID" ColumnName="CheckID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mtConfirmFlow">
+            <EntityTypeMapping TypeName="ajIIPdbModel.mtConfirmFlow">
+              <MappingFragment StoreEntitySet="mtConfirmFlow">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ConfirmerLevelID" ColumnName="ConfirmerLevelID" />
+                <ScalarProperty Name="ConfirmerAutoID" ColumnName="ConfirmerAutoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mtConfirmLevel">
+            <EntityTypeMapping TypeName="ajIIPdbModel.mtConfirmLevel">
+              <MappingFragment StoreEntitySet="mtConfirmLevel">
+                <ScalarProperty Name="ConfirmLevelName" ColumnName="ConfirmLevelName" />
+                <ScalarProperty Name="ConfirmLevelID" ColumnName="ConfirmLevelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mdlPeblish">
+            <EntityTypeMapping TypeName="ajIIPdbModel.mdlPeblish">
+              <MappingFragment StoreEntitySet="mdlPeblish">
+                <ScalarProperty Name="Updater" ColumnName="Updater" />
+                <ScalarProperty Name="FileIDs" ColumnName="FileIDs" />
+                <ScalarProperty Name="PeblishContent" ColumnName="PeblishContent" />
+                <ScalarProperty Name="PeblishTitle" ColumnName="PeblishTitle" />
+                <ScalarProperty Name="PeblishType" ColumnName="PeblishType" />
+                <ScalarProperty Name="PeblishID" ColumnName="PeblishID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbApplyBill">
+            <EntityTypeMapping TypeName="ajIIPdbModel.tbApplyBill">
+              <MappingFragment StoreEntitySet="tbApplyBill">
+                <ScalarProperty Name="Updater" ColumnName="Updater" />
+                <ScalarProperty Name="ApplyDate" ColumnName="ApplyDate" />
+                <ScalarProperty Name="ObjectID" ColumnName="ObjectID" />
+                <ScalarProperty Name="ApplyType" ColumnName="ApplyType" />
+                <ScalarProperty Name="ApplyID" ColumnName="ApplyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPeblish">
+            <EntityTypeMapping TypeName="ajIIPdbModel.tbPeblish">
+              <MappingFragment StoreEntitySet="tbPeblish">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Updater" ColumnName="Updater" />
+                <ScalarProperty Name="FileIDs" ColumnName="FileIDs" />
+                <ScalarProperty Name="PeblishContent" ColumnName="PeblishContent" />
+                <ScalarProperty Name="PeblishTitle" ColumnName="PeblishTitle" />
+                <ScalarProperty Name="PeblishType" ColumnName="PeblishType" />
+                <ScalarProperty Name="PeblishID" ColumnName="PeblishID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbConfirmState">
+            <EntityTypeMapping TypeName="ajIIPdbModel.tbConfirmState">
+              <MappingFragment StoreEntitySet="tbConfirmState">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ConfirmerAutoID" ColumnName="ConfirmerAutoID" />
+                <ScalarProperty Name="ConfirmeMemo" ColumnName="ConfirmeMemo" />
+                <ScalarProperty Name="ConfirmerDate" ColumnName="ConfirmerDate" />
+                <ScalarProperty Name="ConfirmerID" ColumnName="ConfirmerID" />
+                <ScalarProperty Name="NeedConfirmLevel" ColumnName="NeedConfirmLevel" />
+                <ScalarProperty Name="CurrConfirmLevel" ColumnName="CurrConfirmLevel" />
+                <ScalarProperty Name="ApplyID" ColumnName="ApplyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbRepair">
+            <EntityTypeMapping TypeName="ajIIPdbModel.tbRepair">
+              <MappingFragment StoreEntitySet="tbRepair">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="RepairContent" ColumnName="RepairContent" />
+                <ScalarProperty Name="RepairTitle" ColumnName="RepairTitle" />
+                <ScalarProperty Name="RepairType" ColumnName="RepairType" />
+                <ScalarProperty Name="RepairID" ColumnName="RepairID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

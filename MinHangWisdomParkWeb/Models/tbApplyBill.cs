@@ -18,5 +18,8 @@ namespace MinHangWisdomParkWeb.Models
         public string ApplyType { get; set; }
         public string ObjectID { get; set; }
         public Nullable<System.DateTime> ApplyDate { get; set; }
+        public string Updater { get; set; }
+    
+        public virtual tbConfirmState tbConfirmState { get; set; }
     }
 }

@@ -49,6 +49,20 @@ namespace MinHangWisdomParkWeb.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 模板页
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Index(string Type,string Title)
+        {
+            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Title))
+            {
+                ViewBag.Type = Type.Replace("申请", "");
+                ViewBag.Title = Title;
+            }
+            return View();
+        }
+
         #endregion
     }
 }
