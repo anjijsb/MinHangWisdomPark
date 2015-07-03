@@ -21,6 +21,8 @@ namespace MinHangWisdomParkWeb.Models
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
         public string UserParentId { get; set; }
+        public Nullable<int> ActorId { get; set; }
+        public string UserPWD { get; set; }
     
         public virtual mtOwner mtOwner { get; set; }
     }

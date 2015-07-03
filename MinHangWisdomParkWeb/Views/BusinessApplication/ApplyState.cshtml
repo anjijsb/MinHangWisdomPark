@@ -1,0 +1,95 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#News" data-toggle="tab">网上报修</a></li>
+            <li><a href="#Notice" data-toggle="tab">园区公告发布授权</a></li>
+            <li><a href="#Advent" data-toggle="tab">广告信息发布授权</a></li>
+            <li><a href="#Policy" data-toggle="tab">政策信息发布授权</a></li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="News">
+                <p>
+                    <table class="table table-striped table-hover text-center">
+                        <tr>
+                            <th>#</th>
+                            <th>申请类别</th>
+                            <th>申请标题</th>
+                            <th>申请时间</th>
+                            <th>审核状态</th>
+                        </tr>
+                        @if (ViewBag.ApplyList != null)
+                        {
+                            int count = 1;
+                            string b = "b" + count;
+                            foreach (MinHangWisdomParkWeb.Controllers.ApplyStateListJian a in ViewBag.ApplyList as List<MinHangWisdomParkWeb.Controllers.ApplyStateListJian>)
+                            {
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@a.TypeName</td>
+                                    <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#@b">@a.RepairTitle</button></td>
+                                    <td>@a.Time</td>
+                                    <td>@a.StateName</td>
+                                </tr>
+                                count++;
+                            }
+                        }
+                    </table>
+                </p>
+            </div>
+            <div class="tab-pane fade" id="Notice">
+                <p>
+                    园区公告发布授权
+                </p>
+            </div>
+            <div class="tab-pane fade" id="Advent">
+                <p>
+                    广告信息发布授权
+                </p>
+            </div>
+            <div class="tab-pane fade" id="Policy">
+                <p>
+                    政策信息发布授权
+                </p>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+
+<!-- Modal -->
+@if (ViewBag.ApplyList != null)
+{
+    int count = 1;
+    string b = "b" + count;
+    foreach (MinHangWisdomParkWeb.Controllers.ApplyStateListJian a in ViewBag.ApplyList as List<MinHangWisdomParkWeb.Controllers.ApplyStateListJian>)
+    {
+        <div class="modal fade" id="@b" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">@a.RepairTitle</h4>
+                    </div>
+                    <div class="modal-body">
+                        @a.RepairContent
+                    </div>
+                </div>
+            </div>
+        </div>
+        count++;
+    }
+}
+
+
+
+

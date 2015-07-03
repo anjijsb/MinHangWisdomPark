@@ -9,8 +9,14 @@
 
 <div class="row">
     <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <input type="text" class="form-control" id="PeblishType" placeholder="发布类型" value="@ViewBag.Type" readonly="readonly">
+    <div class="col-md-4">
+        <input type="text" class="form-control" id="PeblishType" placeholder="发布类型" tag="@ViewBag.CodeID" value="@ViewBag.Type" readonly="readonly">
+    </div>
+    <div class="col-md-4 text-center">
+        <div class="input-group">
+            <div class="input-group-addon">请选择时间:</div>
+            <input type="text" id="DateTime" value="@DateTime.Now" datetimeold="@DateTime.Now" readonly class=" form_datetime form-control">
+        </div>
     </div>
     <div class="col-md-2"></div>
 </div>
@@ -25,13 +31,6 @@
     <div class="col-md-2"></div>
     <div class="col-md-8">
         <textarea class="form-control" id="PublishContent" rows="6" placeholder="发布内容"></textarea>
-    </div>
-    <div class="col-md-2"></div>
-</div>
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 text-center">
-        <button class="btn btn-info" type="button" id="imgUpload">文件上传</button>
     </div>
     <div class="col-md-2"></div>
 </div>
@@ -52,13 +51,17 @@
 
 <div class="row">
     <div class="col-md-2"></div>
-    <div class="col-md-8 text-center">
+    <div class="col-md-4 text-center">
+        <button class="btn btn-info" type="button" id="imgUpload">上传图片</button>
+    </div>
+    <div class="col-md-4 text-center">
         <button type="button" id="btnzong" class="btn btn-info">确认提交</button>
     </div>
     <div class="col-md-2"></div>
 </div>
 
 <script type="text/javascript">
+    $(".form_datetime").datetimepicker({ format: 'yyyy-mm-dd hh:ii' });
     //上传图片
     $("#imgUpload").click(function () {
         if ($("#imgzhanshi").children().length >= 3) {
@@ -101,13 +104,15 @@
         })
     }
 
-
     //提交数据
     $("#btnzong").click(function () {
-        var PeblishType = $("#PeblishType").val();
+        var PeblishType = $("#PeblishType").attr("tag");
         var PeblishTitle = $("#PeblishTitle").val();
         var PublishContent = $("#PublishContent").val();
         var PublishImg = [];
+        var DateTimeNew = $("#DateTime").val();
+        var DateTimeOld = $("#DateTime").attr("DateTimeOld");
+
         $("#imgzhanshi").children().each(function () {
             var id = $(this).attr("imgid");
             PublishImg.push(id);
@@ -116,11 +121,13 @@
         if (PeblishType == "" || PeblishTitle == "" || PublishContent == "") {
             alert("标题 内容必须填写！");
             return false;
-        } 
+        }
 
-        $.post("InsertPeblishApply", { PeblishType: PeblishType, PeblishTitle: PeblishTitle, PublishContent: PublishContent, PublishImg: { 0: PublishImg[0], 1: PublishImg[1], 2: PublishImg[2] } },function (data, stauts) {
+        $.post("InsertPeblishApply", { PeblishType: PeblishType, PeblishTitle: PeblishTitle, PublishContent: PublishContent, PublishImg: { 0: PublishImg[0], 1: PublishImg[1], 2: PublishImg[2] }, DateTimeNew: DateTimeNew, DateTimeOld: DateTimeOld }, function (data, stauts) {
             if (stauts == "success") {
-                if (data.msg == "ok") {
+                if (data.msg == "time") {
+                    alert("不能选择之前时间段！")
+                } else if (data.msg == "ok") {
                     alert("提交成功");
                 } else {
                     alert("提交失败！");

@@ -69,6 +69,11 @@
 
     <!-- AdminLTE for demo purposes -->
     <script src="@Url.Content("~/dist/js/demo.js")" type="text/javascript"></script>
+
+    <!--时间插件-->
+    <script src="@Url.Content("~/bootstrap/DateTime/locales/bootstrap-datetimepicker.fr.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/bootstrap/DateTime/bootstrap-datetimepicker.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/bootstrap/DateTime/bootstrap-datetimepicker.min.css")" rel="stylesheet" />
 </head>
 <body class="skin-blue sidebar-mini">
     <div class="wrapper">
@@ -107,6 +112,7 @@
                                 <li class="user-footer">
                                     <div class="pull-left">
                                         @*<a href="#" class="btn btn-default btn-flat">Profile</a>*@
+                                        >
                                     </div>
                                     <div class="text-center">
                                         <a href="#" class="btn btn-default btn-flat">退出</a>
@@ -162,7 +168,7 @@
                                 <ul class="treeview-menu">
                                     @foreach (var a in i.FunctionList)
                                     {
-                                        <li><a href="/@a.Type?Type=@a.FunctionName&Title=@a.FunctionName"><i class="fa fa-circle-o"></i> @a.FunctionName</a></li>
+                                        <li><a href="/@a.Type&Type=@a.FunctionName&Title=@a.FunctionName"><i class="fa fa-circle-o"></i> @a.FunctionName</a></li>
                                     }
                                 </ul>
                             </li>

@@ -18,6 +18,8 @@ namespace MinHangWisdomParkWeb
         /// <returns></returns>
         public static List<MinHangWisdomParkWeb.Controllers.Menus> MenuList()
         {
+            GlobalParameter.UserName = "测试";
+            GlobalParameter.UserId = "00000001";
             using (Models.ajIIPdbEntities1 dal = new Models.ajIIPdbEntities1())
             {
                 List<MinHangWisdomParkWeb.Controllers.Menus> menus = new List<MinHangWisdomParkWeb.Controllers.Menus>();

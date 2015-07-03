@@ -12,10 +12,11 @@ namespace MinHangWisdomParkWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class mtUserPower
+    public partial class mtActor
     {
-        public string UserId { get; set; }
-        public int FuncNo { get; set; }
-        public int PowerId { get; set; }
+        public int ActorID { get; set; }
+        public string ActorName { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
+        public Nullable<System.DateTime> UpdateTime { get; set; }
     }
 }

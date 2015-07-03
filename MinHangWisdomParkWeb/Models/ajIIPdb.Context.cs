@@ -35,7 +35,6 @@ namespace MinHangWisdomParkWeb.Models
         public DbSet<mtRfidCode> mtRfidCode { get; set; }
         public DbSet<mtUniversalCode> mtUniversalCode { get; set; }
         public DbSet<mtUser> mtUser { get; set; }
-        public DbSet<mtUserPower> mtUserPower { get; set; }
         public DbSet<tbBuniess> tbBuniess { get; set; }
         public DbSet<tbCar> tbCar { get; set; }
         public DbSet<tbFiles> tbFiles { get; set; }
@@ -50,10 +49,13 @@ namespace MinHangWisdomParkWeb.Models
         public DbSet<mtConfirmFlow> mtConfirmFlow { get; set; }
         public DbSet<mtConfirmLevel> mtConfirmLevel { get; set; }
         public DbSet<mdlPeblish> mdlPeblish { get; set; }
-        public DbSet<tbApplyBill> tbApplyBill { get; set; }
         public DbSet<tbPeblish> tbPeblish { get; set; }
         public DbSet<tbConfirmState> tbConfirmState { get; set; }
         public DbSet<tbRepair> tbRepair { get; set; }
+        public DbSet<mtActor> mtActor { get; set; }
+        public DbSet<tbActorPower> tbActorPower { get; set; }
+        public DbSet<tbApplyBill> tbApplyBill { get; set; }
+        public DbSet<tbTemp> tbTemp { get; set; }
     
         public virtual int Proc_RegistrantID(string registrantType)
         {

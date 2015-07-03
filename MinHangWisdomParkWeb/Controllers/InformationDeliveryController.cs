@@ -59,11 +59,13 @@ namespace MinHangWisdomParkWeb.Controllers
         /// </summary>
         /// <param name="type">信息类型</param>
         /// <returns></returns>
-        public ActionResult Index(string Type, string Title)
+        public ActionResult Index(string Type, string Title, string CodeID)
         {
-            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Title))
+            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(CodeID))
             {
+                int codeid = int.Parse(CodeID);
                 ViewBag.Type = Type.Replace("发布管理", "");
+                ViewBag.CodeID = dal.mtUniversalCode.FirstOrDefault(m => m.UniversalType == "PeblishType" && m.CodeID == codeid).CodeID;
                 ViewBag.Title = Title;
             }
             return View();
@@ -217,12 +219,20 @@ namespace MinHangWisdomParkWeb.Controllers
         /// <param name="PeblishTitle"></param>
         /// <param name="PublishContent"></param>
         /// <param name="PublishImg"></param>
-        public JsonResult InsertPeblishApply(string PeblishType, string PeblishTitle, string PublishContent, string[] PublishImg)
+        public JsonResult InsertPeblishApply(string PeblishType, string PeblishTitle, string PublishContent, string[] PublishImg, string DateTimeNew, string DateTimeOld)
         {
             try
             {
-                applyhelp.InsertApplyBill(InsertPeblish(PeblishType, PeblishTitle, PublishContent, PublishImg), "Peblish");
-                return Json(new { msg = "ok" });
+
+                if (DateTime.Parse(DateTimeNew) < DateTime.Parse(DateTimeOld))
+                {
+                    return Json(new { msg = "time" });
+                }
+                else
+                {
+                    applyhelp.InsertApplyBill(InsertPeblish(PeblishType, PeblishTitle, PublishContent, PublishImg), "Peblish", DateTimeNew);
+                    return Json(new { msg = "ok" });
+                }
             }
             catch (Exception)
             {
@@ -251,9 +261,7 @@ namespace MinHangWisdomParkWeb.Controllers
                     PeblishType = PeblishType,
                     PeblishTitle = PeblishTitle,
                     PeblishContent = PublishContent,
-                    Updater = GlobalParameter.UserName,
-                    CreateTime = DateTime.Now,
-                    UpdateTime = DateTime.Now
+                    Updater = GlobalParameter.UserName
                 };
                 if (PublishImg != null)
                 {

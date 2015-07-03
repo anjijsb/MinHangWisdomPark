@@ -50,8 +50,7 @@ namespace MinHangWisdomParkWeb.Controllers
         /// <returns></returns>
         public ActionResult Repair(string Type, string Title)
         {
-            GlobalParameter.UserName = "测试";
-            GlobalParameter.UserId = "00000001";
+
             if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Title))
             {
                 ViewBag.TypeList = Helps.UniversalCodeList("RepairType");
@@ -68,23 +67,29 @@ namespace MinHangWisdomParkWeb.Controllers
         /// <param name="PeblishTitle"></param>
         /// <param name="PublishContent"></param>
         /// <returns></returns>
-        public JsonResult Insert(string RepairType, string RepairTitle, string RepairContent)
+        public JsonResult Insert(string RepairType, string RepairTitle, string RepairContent, string DateTimeNew, string DateTimeOld)
         {
             try
             {
-                Models.tbRepair repair = new Models.tbRepair
+                if (DateTime.Parse(DateTimeNew) < DateTime.Parse(DateTimeOld))
                 {
-                    RepairID = (int.Parse((dal.tbRepair.Max(m => m.RepairID) == null ? "0" : dal.tbRepair.Max(m => m.RepairID))) + 1).ToString().PadLeft(12, '0'),
-                    RepairType = int.Parse(RepairType),
-                    RepairTitle = RepairTitle,
-                    RepairContent = RepairContent,
-                    StateCode = 1,
-                    CreateTime = DateTime.Now
-                };
+                    return Json(new { msg = "time" });
+                }
+                else
+                {
+                    Models.tbRepair repair = new Models.tbRepair
+                    {
+                        RepairID = (int.Parse((dal.tbRepair.Max(m => m.RepairID) == null ? "0" : dal.tbRepair.Max(m => m.RepairID))) + 1).ToString().PadLeft(12, '0'),
+                        RepairType = int.Parse(RepairType),
+                        RepairTitle = RepairTitle,
+                        RepairContent = RepairContent,
+                        StateCode = 1,
+                    };
 
-                applyhelp.InsertApplyBill(InsertRepair(repair), "Repair");
+                    applyhelp.InsertApplyBill(InsertRepair(repair), "Repair", DateTimeNew);
 
-                return Json(new { msg = "ok" });
+                    return Json(new { msg = "ok" });
+                }
             }
             catch (Exception)
             {
@@ -118,9 +123,6 @@ namespace MinHangWisdomParkWeb.Controllers
         /// <returns></returns>
         public ActionResult ApplyState(string Title)
         {
-            GlobalParameter.UserId = "00000001";
-
-
             if (!string.IsNullOrEmpty(Title))
             {
                 ViewBag.Title = Title;
@@ -130,7 +132,7 @@ namespace MinHangWisdomParkWeb.Controllers
                       from u in dal.mtUniversalCode
                       from u1 in dal.mtUniversalCode
                       from b in dal.tbApplyBill
-                      where r.StateCode == u.CodeID
+                      where b.StateType == u.CodeID
                       && u.UniversalType == "StateType"
                       && u1.UniversalType == "RepairType"
                       && u1.CodeID == r.RepairType
@@ -146,7 +148,8 @@ namespace MinHangWisdomParkWeb.Controllers
                           RepairContent = r.RepairContent
                       }).ToList();
 
-            ViewBag.ApplyList = bb;
+            var aa = bb.OrderByDescending(a => a.Time).ToList();
+            ViewBag.ApplyList = aa;
 
             return View();
         }
@@ -179,7 +182,7 @@ namespace MinHangWisdomParkWeb.Controllers
         /// </summary>
         /// <param name="checkout"></param>
         /// <returns></returns>
-        public void Insert(string InOutFlag, string InOutType, string CheckTitle, string CheckContent)
+        public void InsertCheck(string InOutFlag, string InOutType, string CheckTitle, string CheckContent)
         {
             try
             {

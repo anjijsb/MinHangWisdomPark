@@ -14,7 +14,7 @@ namespace MinHangWisdomParkWeb
         /// 插入AppleBill表数据
         /// </summary>
         /// <returns></returns>
-        public void InsertApplyBill(string ObjectID, string ApplyType)
+        public void InsertApplyBill(string ObjectID, string ApplyType, string DateTimeNew)
         {
             try
             {
@@ -23,8 +23,9 @@ namespace MinHangWisdomParkWeb
                 {
                     ApplyType = ApplyType,
                     ObjectID = ObjectID,
-                    ApplyDate = DateTime.Now,
-                    Updater = GlobalParameter.UserId
+                    Updater = GlobalParameter.UserId,
+                    ApplyDate = DateTime.Parse(DateTimeNew),
+                    StateType = 1
                 };
                 dal.tbApplyBill.Add(applybills);
                 dal.SaveChanges();
@@ -43,6 +44,7 @@ namespace MinHangWisdomParkWeb
         public void InsertConfirmStart(int ApplyID, int NeedConfirmLevel, int ConfirmerAutoID)
         {
             var tem = dal.mtConfirmFlow.Where(m => m.ConfirmerAutoID == ConfirmerAutoID && m.ConfirmerLevelID == 1).FirstOrDefault();
+
             MinHangWisdomParkWeb.Models.tbConfirmState confirmstates = new Models.tbConfirmState
             {
                 ApplyID = ApplyID,
@@ -50,12 +52,45 @@ namespace MinHangWisdomParkWeb
                 NeedConfirmLevel = NeedConfirmLevel,
                 ConfirmerID = tem.UserId,
                 ConfirmerAutoID = ConfirmerAutoID,
-                CreateTime = DateTime.Now
             };
             dal.tbConfirmState.Add(confirmstates);
             dal.SaveChanges();
         }
 
+
+        /// <summary>
+        /// 审核
+        /// </summary>
+        /// <param name="ApplyID"></param>
+        /// <param name="bools"></param>
+        /// <param name="content"></param>
+        public void UpdateComfirmStart(int ApplyID, int bools, string content)
+        {
+            Models.tbConfirmState ConfirmState = dal.tbConfirmState.FirstOrDefault(m => m.ApplyID == ApplyID);
+            Models.tbApplyBill ApplyBill = dal.tbApplyBill.FirstOrDefault(m => m.ApplyID == ApplyID);
+            if (bools == 0)
+            {
+                ConfirmState.ConfirmerID = null;
+                ConfirmState.CurrConfirmLevel = 0;
+                ApplyBill.StateType = 3;
+                dal.SaveChanges();
+            }
+            else if (bools == 1)
+            {
+                if (ConfirmState.CurrConfirmLevel > ConfirmState.NeedConfirmLevel)
+                {
+                    ConfirmState.ConfirmerID = null;
+                    ApplyBill.StateType = 2;
+                }
+                else
+                {
+                    ConfirmState.CurrConfirmLevel += 1;
+                    ConfirmState.ConfirmerID = dal.mtConfirmFlow.Where(m => m.ConfirmerAutoID == ConfirmState.ConfirmerAutoID && m.ConfirmerLevelID == ConfirmState.CurrConfirmLevel).FirstOrDefault().UserId;
+                }
+                dal.SaveChanges();
+            }
+
+        }
 
     }
 }

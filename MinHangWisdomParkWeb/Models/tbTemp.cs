@@ -12,16 +12,15 @@ namespace MinHangWisdomParkWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbApplyBill
+    public partial class tbTemp
     {
-        public int ApplyID { get; set; }
-        public string ApplyType { get; set; }
-        public string ObjectID { get; set; }
-        public Nullable<System.DateTime> ApplyDate { get; set; }
-        public string Updater { get; set; }
+        public string TempID { get; set; }
+        public int Version { get; set; }
+        public string UseType { get; set; }
+        public string TempName { get; set; }
+        public string TempDesc { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
-        public Nullable<int> StateType { get; set; }
-    
-        public virtual tbConfirmState tbConfirmState { get; set; }
+        public Nullable<int> StateCode { get; set; }
     }
 }
