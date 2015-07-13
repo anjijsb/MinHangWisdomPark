@@ -10,8 +10,6 @@
     <meta name="viewport" content="width=device-width" />
     <title>RuKou</title>
     <style type="text/css">
-       
-
         .app {
             position: fixed;
             top: 5%;
@@ -149,21 +147,24 @@
 
         .imgdzkb {
             position: fixed;
-            width: 70%;
+            width: 40%;
             top: 2%;
-            left: 15%;
+            left: 30%;
             display: none;
         }
-         .imgjiagou {
+
+        .imgjiagou {
             position: fixed;
             top: 5%;
-            width:70%;
+            width: 70%;
             left: 15%;
             display: none;
+            max-height: 80%;
         }
+
         .divbody {
-            width:760px;
-            margin:0 auto;
+            width: 760px;
+            margin: 0 auto;
         }
 
             .divbody img {
@@ -180,18 +181,39 @@
             width: 1000px;
             margin: 0 auto;
         }
+
+        #appxiangsi {
+            position: fixed;
+            top: 10%;
+            left: 40%;
+            display: none;
+            width: 20%;
+            max-height: 80%;
+        }
+
+        #carousel-example-generic .carousel-inner img {
+            width: 100%;
+        }
+
+        #appguanbi span {
+            font-size: 3em;
+        }
+
+        #myModal .modal-content {
+            max-height: 80%;
+        }
     </style>
 </head>
 <body>
     <div class="divbody">
-        <img src="~/img/gyy.jpg"  />
+        <img src="~/img/gyy.jpg" />
         <div class="pull-right">
             <button class="btn btn-default quan">门户</button><br />
-            <button class="btn btn-primary ban" data-toggle="modal" data-target="#myModal">后台</button>
+            <button class="btn btn-primary ban" data-toggle="modal" data-target="#myModal" id="houtai">后台</button>
             <button class="btn btn-success ban">APP</button><br />
             <button class="btn btn-info quan">微信</button><br />
             <button class="btn btn-warning ban">架构</button>
-            <button class="btn btn-default ban">电子看板</button><br />
+            <button class="btn btn-default ban">一体机</button><br />
         </div>
     </div>
     <div class="wxbg">
@@ -251,10 +273,20 @@
                         </button>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#" tg="07">电子标签登录</a></li>
-                            <li><a href="#" tg="08">证卡分发</a></li>
                             <li><a href="#" tg="09">挂失补办</a></li>
                             <li><a href="#" tg="10">证卡报废</a></li>
                             <li><a href="#" tg="11">证卡信息查询</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            硬件
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#" tg="12">车辆视频监控</a></li>
+                            <li><a href="#" tg="13">停车出入管理</a></li>
+                            <li><a href="#" tg="14">一卡通管理系统</a></li>
                         </ul>
                     </div>
                 </div>
@@ -264,10 +296,87 @@
             </div>
         </div>
     </div>
+
+    <div id="appxiangsi">
+
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                @*<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>*@
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner text-center" role="listbox">
+                <div class="item active text-center">
+                    <img src="~/img/appjiemian/01登录.jpg" />
+                </div>
+                <div class="item">
+                    <img src="~/img/appjiemian/02-1主页进入页面2.jpg" />
+                </div>
+                <div class="item">
+                    <img src="~/img/appjiemian/02-2主页进入页面.jpg" />
+                </div>
+
+                <div class="item">
+                    <img src="~/img/appjiemian/03业务申请.jpg" />
+                </div>
+                <div class="item">
+                    <img src="~/img/appjiemian/04具体业务.jpg" />
+                </div>
+              
+                <div class="item">
+                    <img src="~/img/appjiemian/07我的审核列表.jpg" />
+                </div>
+                <div class="item">
+                    <img src="~/img/appjiemian/05社区互动.jpg" />
+                </div>
+                <div class="item">
+                    <img src="~/img/appjiemian/06论坛点进去评论.jpg" />
+                </div>
+                <div class="item">
+                    <img src="~/img/appjiemian/08-1移动审核列表.jpg" />
+                </div>
+                <div class="item">
+                    <img src="~/img/appjiemian/08-2审核详情.jpg" />
+                </div>
+                
+                <div class="item">
+                    <img src="~/img/appjiemian/地图展示.jpg" />
+                </div>
+                <div class="item">
+                    <img src="~/img/appjiemian/实时监控列表.jpg" />
+                </div>
+                <div class="item">
+                    <img src="~/img/appjiemian/园区公告.jpg" />
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <button type="button" id="appguanbi" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+
 </body>
 </html>
 <script src="~/Scripts/jquery-1.8.2.js"></script>
 <script type="text/javascript">
+    $("#appguanbi").click(function () {
+        $(this).parent().hide();
+    })
+    $("#houtai").click(function () {
+        $(".modal-body-img").attr("src", "../../img/NewFolder2/ddd.JPG");
+    })
     $("button").click(function () {
         var str = $(this).html();
         if (str == "门户") {
@@ -293,28 +402,12 @@
             })
 
         } else if (str == "APP") {
-            $(".app").show().children().click(function () {
-                var str = $(this).attr("class");
-                if (str == "shang") {
-                    $(this).parent().children().eq(0).attr("src", "../../img/NewFolder1/06.png");
-                    $(".shen").show().click(function () {
-                        $(this).parent().children().eq(0).attr("src", "../../img/NewFolder1/02.jpg");
-                        $(".xiang").show().click(function () {
-                            $(this).parent().children().eq(0).attr("src", "../../img/NewFolder1/04.jpg");
-                        })
-                    });
-                } else if (str == "zhong") {
-                    $(this).parent().children().eq(0).attr("src", "../../img/NewFolder1/03.jpg");
-                    $(".xiang").show().click(function () {
-                        $(this).parent().children().eq(0).attr("src", "../../img/NewFolder1/04.jpg");
-                    })
-                }
-            })
+            $("#appxiangsi").show();
         } else if (str == "架构") {
             $(".imgjiagou").show().click(function () {
                 $(this).hide();
             })
-        } else if (str == "电子看板") {
+        } else if (str == "一体机") {
             $(".imgdzkb").show().click(function () {
                 $(this).hide();
             })

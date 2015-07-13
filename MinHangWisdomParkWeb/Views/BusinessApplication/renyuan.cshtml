@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .row, textarea {
+        margin-top: 1em;
+    }
+</style>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-6  text-center">
+                <div class="input-group">
+                    <div class="input-group-addon">请选择时间:</div>
+                    <input type="text" id="DateTime" value="@DateTime.Now" datetimeold="@DateTime.Now" readonly class=" form_datetime form-control">
+                </div>
+            </div>
+            <div class="col-md-6  text-center">
+                <div class="input-group">
+                    <div class="input-group-addon">请输入数量:</div>
+                    <input type="number" class=" form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" id="PeblishTitle" placeholder="请输入标题">
+                <textarea class="form-control" id="PublishContent" rows="6" placeholder="请输入内容"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 text-center">
+        <button type="button" id="btnzong" class="btn btn-info">确认提交</button>
+    </div>
+    <div class="col-md-2"></div>
+</div>

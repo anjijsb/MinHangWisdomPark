@@ -49,8 +49,6 @@ namespace MinHangWisdomParkWeb
         {
             return dal.mtUniversalCode.Where(m => m.UniversalType == Type).ToList();
         }
-
-
     }
 
     /// <summary>

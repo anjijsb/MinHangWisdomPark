@@ -39,6 +39,22 @@ namespace MinHangWisdomParkWeb.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult kazhenfaxing(string Type, string Title)
+        {
+            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Title))
+            {
+                ViewBag.Type = Type.Replace("申请", "");
+                ViewBag.Title = Title;
+            }
+            return View();
+        }
+
+
         #endregion
     }
 }

@@ -1,0 +1,121 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <table class="table table-striped table-hover text-center">
+            <tr>
+                <th>姓名</th>
+                <th>所属业主</th>
+                <th>分配角色</th>
+                <th>操作</th>
+            </tr>
+            <tr>
+                <td>张三</td>
+                <td>园区建筑3部</td>
+                <td>工头</td>
+                <td><button type="button" class="btn btn-danger">删除</button> </td>
+            </tr>
+            <tr>
+                <td>张三</td>
+                <td>园区建筑3部</td>
+                <td>工头</td>
+                <td><button type="button" class="btn btn-danger">删除</button> </td>
+            </tr>
+            <tr>
+                <td>张三</td>
+                <td>园区建筑3部</td>
+                <td>工头</td>
+                <td><button type="button" class="btn btn-danger">删除</button></td>
+            </tr>
+            <tr>
+                <td>张三</td>
+                <td>园区建筑3部</td>
+                <td>工头</td>
+                <td><button type="button" class="btn btn-danger">删除</button> </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-7 text-right">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">+ 添加</button>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2"></div>
+</div>
+
+
+
+<!-- 添加 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加数据</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group" style="margin-bottom:1.5em;">
+                            <div class="input-group-addon">业主选择:</div>
+                            <select class="form-control" id="yewu">
+                                <option>请选择业主</option>
+                                <option>园区建筑1部</option>
+                                <option>园区建筑2部</option>
+                                <option>园区建筑4部</option>
+                                <option>园区建筑5部</option>
+                            </select>
+                        </div>
+                        <div class="input-group" style="margin-bottom:1.5em;">
+                            <div class="input-group-addon">用户选择:</div>
+                            <select class="form-control" id="yonghu">
+                                <option>请先选择业主</option>
+                                <option>王五</option>
+                                <option>赵六</option>
+                                <option>田七</option>
+                                <option>牌九</option>
+                            </select>
+                        </div>
+                        <div class="input-group" style="margin-bottom:1.5em;">
+                            <div class="input-group-addon">角色选择:</div>
+                            <select class="form-control" id="juese">
+                                <option>请先选择用户</option>
+                                <option>工头</option>
+                                <option>工人</option>
+                                <option>管理员</option>
+                                <option>信息审核员</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确认添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(".btn-danger").click(function () {
+        $(this).parent().parent().remove();
+    })
+    $(".btn-primary").click(function () {
+        var yewu = $("#yewu").val();
+        var yonghu = $("#yonghu").val();
+        var juese = $("#juese").val();
+        var str = '  <tr><td>' + yonghu + '</td><td>' + yewu + '</td><td>' + juese + '</td><td><button type="button" class="btn btn-danger">删除</button> </tr>';
+        $(".table").append(str);
+        $("#yewu option:first").prop("selected", 'selected');
+        $("#yonghu option:first").prop("selected", 'selected');
+        $("#juese option:first").prop("selected", 'selected');
+    })
+
+</script>

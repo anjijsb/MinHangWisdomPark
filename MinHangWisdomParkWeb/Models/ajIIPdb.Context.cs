@@ -35,7 +35,6 @@ namespace MinHangWisdomParkWeb.Models
         public DbSet<mtRfidCode> mtRfidCode { get; set; }
         public DbSet<mtUniversalCode> mtUniversalCode { get; set; }
         public DbSet<mtUser> mtUser { get; set; }
-        public DbSet<tbBuniess> tbBuniess { get; set; }
         public DbSet<tbCar> tbCar { get; set; }
         public DbSet<tbFiles> tbFiles { get; set; }
         public DbSet<tbIORecord> tbIORecord { get; set; }
@@ -56,6 +55,7 @@ namespace MinHangWisdomParkWeb.Models
         public DbSet<tbActorPower> tbActorPower { get; set; }
         public DbSet<tbApplyBill> tbApplyBill { get; set; }
         public DbSet<tbTemp> tbTemp { get; set; }
+        public DbSet<tbBuniess> tbBuniess { get; set; }
     
         public virtual int Proc_RegistrantID(string registrantType)
         {

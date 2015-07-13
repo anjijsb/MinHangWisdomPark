@@ -109,71 +109,24 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="header">菜单</li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i>
-                            <span>信息发布管理</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="/InformationDelivery/News"><i class="fa fa-circle-o"></i> 新闻信息发布管理</a></li>
-                            <li><a href="/InformationDelivery/Park"><i class="fa fa-circle-o"></i> 园区信息发布管理</a></li>
-                            <li><a href="/InformationDelivery/Advertisement"><i class="fa fa-circle-o"></i> 广告信息发布管理</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-files-o"></i>
-                            <span>授权审核管理</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="/AuthorizationAudit/Park"><i class="fa fa-circle-o"></i> 园区项目审核授权</a></li>
-                            <li><a href="/AuthorizationAudit/Personnel"><i class="fa fa-circle-o"></i> 人员入园申请授权</a></li>
-                            <li><a href="/AuthorizationAudit/Car"><i class="fa fa-circle-o"></i> 车辆入园申请授权</a></li>
-                            <li><a href="/AuthorizationAudit/Temporary"><i class="fa fa-circle-o"></i> 临时访问授权审核</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>系统权限管理</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="/SystemAuthority/Function"><i class="fa fa-circle-o"></i> 角色管理</a></li>
-                            <li><a href="/SystemAuthority/Data"><i class="fa fa-circle-o"></i> 树型层级限定</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="/Main/LunTan">
-                            <i class="fa fa-th"></i> <span>网络社区管理</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>运营数据统计</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="/OperatingIncome/Card"><i class="fa fa-circle-o"></i> 运营收入</a></li>
-                            <li><a href="/OperatingIncome/Advertisement"><i class="fa fa-circle-o"></i> 流量监控</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-edit"></i>
-                            <span>业务在线申请</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="/BusinessApplication/Company"><i class="fa fa-circle-o"></i> 车辆申请</a></li>
-                            <li><a href="/BusinessApplication/Enterprise"><i class="fa fa-circle-o"></i> 人员申请</a></li>
-                            <li><a href="/BusinessApplication/Visitor"><i class="fa fa-circle-o"></i> 访客业务申请/查询</a></li>
-                        </ul>
-                    </li>
+                    @{
+                        foreach (MinHangWisdomParkWeb.Controllers.Menus i in MinHangWisdomParkWeb.Helps.MenuList())
+                        {
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-dashboard"></i>
+                                    <span>@i.FunctionName</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    @foreach (var a in i.FunctionList)
+                                    {
+                                        <li><a href="/@a.Type&Type=@a.FunctionName&Title=@a.FunctionName"><i class="fa fa-circle-o"></i> @a.FunctionName</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                    }
                 </ul>
             </section>
             <!-- /.sidebar -->

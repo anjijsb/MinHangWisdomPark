@@ -15,28 +15,264 @@
 
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade in active" id="News">
-                <p>
-                    新闻信息发布授权
-                </p>
+                <table class="table table-striped table-hover text-center">
+                    <tr>
+                        <th>#</th>
+                        <th>申请标题</th>
+                        <th>申请时间</th>
+                        <th>申请人</th>
+                    </tr>
+                    @if (ViewBag.PeblishList1 != null)
+                    {
+                        int count = 1;
+                        foreach (MinHangWisdomParkWeb.Controllers.ShenHe a in ViewBag.PeblishList1 as List<MinHangWisdomParkWeb.Controllers.ShenHe>)
+                        {
+                            string b = "wuye1" + count;
+                            <tr>
+                                <td>@count</td>
+                                <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#@b">@a.Title</button></td>
+                                <td>@a.Time</td>
+                                <td>@a.Updater</td>
+                            </tr>
+                            count++;
+                        }
+                    }
+                </table>
             </div>
             <div class="tab-pane fade" id="Notice">
-                <p>
-                    园区公告发布授权
-                </p>
+                <table class="table table-striped table-hover text-center">
+                    <tr>
+                        <th>#</th>
+                        <th>申请标题</th>
+                        <th>申请时间</th>
+                        <th>申请人</th>
+                    </tr>
+                    @if (ViewBag.PeblishList2 != null)
+                    {
+                        int count = 1;
+                        foreach (MinHangWisdomParkWeb.Controllers.ShenHe a in ViewBag.PeblishList2 as List<MinHangWisdomParkWeb.Controllers.ShenHe>)
+                        {
+                            string b = "wuye2" + count;
+                            <tr>
+                                <td>@count</td>
+                                <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#@b">@a.Title</button></td>
+                                <td>@a.Time</td>
+                                <td>@a.Updater</td>
+                            </tr>
+                            count++;
+                        }
+                    }
+                </table>
             </div>
             <div class="tab-pane fade" id="Advent">
-                <p>
-                    广告信息发布授权
-                </p>
+                <table class="table table-striped table-hover text-center">
+                    <tr>
+                        <th>#</th>
+                        <th>申请标题</th>
+                        <th>申请时间</th>
+                        <th>申请人</th>
+                    </tr>
+                    @if (ViewBag.PeblishList3 != null)
+                    {
+                        int count = 1;
+                        foreach (MinHangWisdomParkWeb.Controllers.ShenHe a in ViewBag.PeblishList3 as List<MinHangWisdomParkWeb.Controllers.ShenHe>)
+                        {
+                            string b = "wuye3" + count;
+                            <tr>
+                                <td>@count</td>
+                                <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#@b">@a.Title</button></td>
+                                <td>@a.Time</td>
+                                <td>@a.Updater</td>
+                            </tr>
+                            count++;
+                        }
+                    }
+                </table>
             </div>
             <div class="tab-pane fade" id="Policy">
-                <p>
-                    政策信息发布授权
-                </p>
+                <table class="table table-striped table-hover text-center">
+                    <tr>
+                        <th>#</th>
+                        <th>申请标题</th>
+                        <th>申请时间</th>
+                        <th>申请人</th>
+                    </tr>
+                    @if (ViewBag.PeblishList4 != null)
+                    {
+                        int count = 1;
+                        foreach (MinHangWisdomParkWeb.Controllers.ShenHe a in ViewBag.PeblishList4 as List<MinHangWisdomParkWeb.Controllers.ShenHe>)
+                        {
+                            string b = "wuye4" + count;
+                            <tr>
+                                <td>@count</td>
+                                <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#@b">@a.Title</button></td>
+                                <td>@a.Time</td>
+                                <td>@a.Updater</td>
+                            </tr>
+                            count++;
+                        }
+                    }
+                </table>
             </div>
         </div>
     </div>
     <div class="col-md-2"></div>
 </div>
+<!-- Modal -->
+@if (ViewBag.PeblishList1 != null)
+{
+    int count = 1;
+    foreach (MinHangWisdomParkWeb.Controllers.ShenHe a in ViewBag.PeblishList1 as List<MinHangWisdomParkWeb.Controllers.ShenHe>)
+    {
+        string b = "wuye1" + count;
+        string bb = "wuyebb1" + count;
+        <div class="modal fade" id="@b" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">@a.Title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>@a.Content</p>
+                        <p class="text-right small">申请人:<b>@a.Updater</b></p>
+                        <p class="text-right small">申请时间:<b>@a.Time</b></p>
+                    </div>
+                    <div class="modal-footer" tag="@a.ApplyID">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea class="form-control" rows="3" placeholder="请填写审核意见"></textarea>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-danger queren" tag="0">不通过</button>
+                        <button type="button" class="btn btn-primary queren" tag="1">通&nbsp;&nbsp;&nbsp;&nbsp;过</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        count++;
+    }
+}
+<!-- Modal -->
+@if (ViewBag.PeblishList2 != null)
+{
+    int count = 1;
+    foreach (MinHangWisdomParkWeb.Controllers.ShenHe a in ViewBag.PeblishList2 as List<MinHangWisdomParkWeb.Controllers.ShenHe>)
+    {
+        string b = "wuye2" + count;
+        string bb = "wuyebb2" + count;
+        <div class="modal fade" id="@b" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">@a.Title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>@a.Content</p>
+                        <p class="text-right small">申请人:<b>@a.Updater</b></p>
+                        <p class="text-right small">申请时间:<b>@a.Time</b></p>
+                    </div>
+                    <div class="modal-footer" tag="@a.ApplyID">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea class="form-control" rows="3" placeholder="请填写审核意见"></textarea>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-danger queren" tag="0">不通过</button>
+                        <button type="button" class="btn btn-primary queren" tag="1">通&nbsp;&nbsp;&nbsp;&nbsp;过</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        count++;
+    }
+}
+<!-- Modal -->
+@if (ViewBag.PeblishList3 != null)
+{
+    int count = 1;
+    foreach (MinHangWisdomParkWeb.Controllers.ShenHe a in ViewBag.PeblishList3 as List<MinHangWisdomParkWeb.Controllers.ShenHe>)
+    {
+        string b = "wuye3" + count;
+        string bb = "wuyebb3" + count;
+        <div class="modal fade" id="@b" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">@a.Title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>@a.Content</p>
+                        <p class="text-right small">申请人:<b>@a.Updater</b></p>
+                        <p class="text-right small">申请时间:<b>@a.Time</b></p>
+                    </div>
+                    <div class="modal-footer" tag="@a.ApplyID">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea class="form-control" rows="3" placeholder="请填写审核意见"></textarea>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-danger queren" tag="0">不通过</button>
+                        <button type="button" class="btn btn-primary queren" tag="1">通&nbsp;&nbsp;&nbsp;&nbsp;过</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        count++;
+    }
+}
+<!-- Modal -->
+@if (ViewBag.PeblishList4 != null)
+{
+    int count = 1;
+    foreach (MinHangWisdomParkWeb.Controllers.ShenHe a in ViewBag.PeblishList4 as List<MinHangWisdomParkWeb.Controllers.ShenHe>)
+    {
+        string b = "wuye4" + count;
+        string bb = "wuyebb4" + count;
+        <div class="modal fade" id="@b" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">@a.Title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>@a.Content</p>
+                        <p class="text-right small">申请人:<b>@a.Updater</b></p>
+                        <p class="text-right small">申请时间:<b>@a.Time</b></p>
+                    </div>
+                    <div class="modal-footer" tag="@a.ApplyID">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea class="form-control" rows="3" placeholder="请填写审核意见"></textarea>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-danger queren" tag="0">不通过</button>
+                        <button type="button" class="btn btn-primary queren" tag="1">通&nbsp;&nbsp;&nbsp;&nbsp;过</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        count++;
+    }
+}
 <script type="text/javascript">
+    $(".queren").click(function () {
+        var applyid = $(this).parent().attr("tag");
+        var content = $(this).parent().find("textarea").val();
+        var bools = $(this).attr("tag");
+        $.post("ShenHe", { applyid: applyid, content: content, bools: bools }, function (data, status) {
+            if (status == "success") {
+                if (data.msg == "ok") {
+                    alert("审核成功！");
+                    location.reload;
+
+                } else {
+                    alert("审核失败！");
+                }
+            }
+        })
+    })
 </script>

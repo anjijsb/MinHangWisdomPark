@@ -14,7 +14,7 @@ namespace MinHangWisdomParkWeb.Models
     
     public partial class tbBuniess
     {
-        public int ApplyID { get; set; }
+        public string BuniessID { get; set; }
         public string BuniessType { get; set; }
         public string BuniessContent { get; set; }
         public Nullable<int> IsCompleted { get; set; }

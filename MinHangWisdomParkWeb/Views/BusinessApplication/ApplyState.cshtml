@@ -7,9 +7,21 @@
     <div class="col-md-8">
         <ul id="myTab" class="nav nav-tabs">
             <li class="active"><a href="#News" data-toggle="tab">网上报修</a></li>
-            <li><a href="#Notice" data-toggle="tab">园区公告发布授权</a></li>
-            <li><a href="#Advent" data-toggle="tab">广告信息发布授权</a></li>
-            <li><a href="#Policy" data-toggle="tab">政策信息发布授权</a></li>
+            <li class="dropdown">
+                <a href="#" id="myTabDrop1" class="dropdown-toggle"
+                   data-toggle="dropdown">
+                    业务在线申请授权
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+                    <li><a href="#zhika" tabindex="-1" data-toggle="tab">人员制卡申请</a></li>
+                    <li><a href="#zhengka" tabindex="-1" data-toggle="tab">证卡在线挂失申请</a></li>
+                    <li><a href="#guashi" tabindex="-1" data-toggle="tab">车辆出入园申请</a></li>
+                    <li><a href="#items" tabindex="-1" data-toggle="tab">重要物品出入园申请</a></li>
+                    <li><a href="#linshi" tabindex="-1" data-toggle="tab">临时出入园申请</a></li>
+                    <li><a href="#people" tabindex="-1" data-toggle="tab">人员出入园申请</a></li>
+                </ul>
+            </li>
         </ul>
 
         <div id="myTabContent" class="tab-content">
@@ -42,28 +54,42 @@
                     </table>
                 </p>
             </div>
-            <div class="tab-pane fade" id="Notice">
+            <div class="tab-pane fade" id="zhika">
                 <p>
-                    园区公告发布授权
+                    人员制卡申请
                 </p>
             </div>
-            <div class="tab-pane fade" id="Advent">
+            <div class="tab-pane fade" id="zhengka">
                 <p>
-                    广告信息发布授权
+                    证卡在线挂失申请
                 </p>
             </div>
-            <div class="tab-pane fade" id="Policy">
+            <div class="tab-pane fade" id="guashi">
                 <p>
-                    政策信息发布授权
+                    车辆出入园申请
+                </p>
+            </div>
+            <div class="tab-pane fade" id="items">
+                <p>
+                    重要物品出入园申请
+                </p>
+            </div>
+            <div class="tab-pane fade" id="linshi">
+                <p>
+                    临时出入园申请
+                </p>
+            </div>
+            <div class="tab-pane fade" id="people">
+                <p>
+                    人员出入园申请
                 </p>
             </div>
         </div>
-
-
-
     </div>
     <div class="col-md-2"></div>
 </div>
+
+
 
 
 <!-- Modal -->

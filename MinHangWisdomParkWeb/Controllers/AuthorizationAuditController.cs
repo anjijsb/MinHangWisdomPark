@@ -89,9 +89,16 @@ namespace MinHangWisdomParkWeb.Controllers
                 ViewBag.Type = Type.Replace("申请", "");
                 ViewBag.Title = Title;
             }
+            ViewBag.PeblishList1 = PeblishList("1");
+            ViewBag.PeblishList2 = PeblishList("2");
+            ViewBag.PeblishList3 = PeblishList("3");
+            ViewBag.PeblishList4 = PeblishList("4");
             return View();
         }
 
+        #endregion
+
+        #region 报修申请授权
 
         /// <summary>
         /// 报修申请
@@ -143,6 +150,39 @@ namespace MinHangWisdomParkWeb.Controllers
                       }).ToList();
             return aa;
         }
+
+        /// <summary>
+        ///提取信息发布个类别数据
+        /// </summary>
+        /// <param name="PeblishType"></param>
+        /// <returns></returns>
+        private List<ShenHe> PeblishList(string PeblishType)
+        {
+            var sq = (from p in dal.tbPeblish
+                      from a in dal.tbApplyBill
+                      from c in dal.tbConfirmState
+                      from u in dal.mtUniversalCode
+                      from u1 in dal.mtUser
+                      where p.PeblishID == a.ObjectID &&
+                      u.UniversalType == "StateType" &&
+                      a.StateType == u.CodeID &&
+                      p.Updater == GlobalParameter.UserId &&
+                      p.PeblishType == PeblishType &&
+                      a.ApplyType == "Peblish" &&
+                      a.ApplyID == c.ApplyID &&
+                      p.Updater == u1.UserId &&
+                      c.ConfirmerID == GlobalParameter.UserId
+                      select new ShenHe
+                      {
+                          ApplyID = a.ApplyID,
+                          Title = p.PeblishTitle,
+                          Time = p.CreateTime,
+                          Updater = u1.UserName,
+                          Content = p.PeblishContent
+                      }).ToList();
+            return sq;
+        }
+
 
 
         #endregion

@@ -67,9 +67,11 @@ namespace MinHangWisdomParkWeb.Controllers
                 ViewBag.Type = Type.Replace("发布管理", "");
                 ViewBag.CodeID = dal.mtUniversalCode.FirstOrDefault(m => m.UniversalType == "PeblishType" && m.CodeID == codeid).CodeID;
                 ViewBag.Title = Title;
+                ViewBag.PeblishList = ShenQin(CodeID);
             }
             return View();
         }
+
 
 
         #region 图片上传
@@ -261,7 +263,7 @@ namespace MinHangWisdomParkWeb.Controllers
                     PeblishType = PeblishType,
                     PeblishTitle = PeblishTitle,
                     PeblishContent = PublishContent,
-                    Updater = GlobalParameter.UserName
+                    Updater = GlobalParameter.UserId
                 };
                 if (PublishImg != null)
                 {
@@ -279,6 +281,36 @@ namespace MinHangWisdomParkWeb.Controllers
         }
 
 
+        /// <summary>
+        /// 提取当前类别数据
+        /// </summary>
+        /// <param name="PeblishType"></param>
+        /// <returns></returns>
+        public List<ShenQin> ShenQin(string PeblishType)
+        {
+            var sq = (from p in dal.tbPeblish
+                      from a in dal.tbApplyBill
+                      from c in dal.tbConfirmState
+                      from u in dal.mtUniversalCode
+                      where p.PeblishID == a.ObjectID &&
+                      u.UniversalType == "StateType" &&
+                      a.StateType == u.CodeID &&
+                      p.Updater == GlobalParameter.UserId &&
+                      p.PeblishType == PeblishType &&
+                      a.ApplyType == "Peblish" &&
+                      a.ApplyID == c.ApplyID
+                      select new ShenQin
+                      {
+                          PeblishID = p.PeblishID,
+                          Title = p.PeblishTitle,
+                          Time = p.CreateTime,
+                          Content = p.PeblishContent,
+                          StateName = u.CodeName
+                      }).ToList();
+
+            return sq;
+        }
+
 
         #endregion
 
@@ -290,5 +322,13 @@ namespace MinHangWisdomParkWeb.Controllers
 
     }
 
+    public class ShenQin
+    {
+        public string PeblishID { get; set; }
+        public string Title { get; set; }
+        public DateTime? Time { get; set; }
+        public string Content { get; set; }
+        public string StateName { get; set; }
+    }
 
 }

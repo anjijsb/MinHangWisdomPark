@@ -141,9 +141,9 @@
         </EntityType>
         <EntityType Name="tbBuniess">
           <Key>
-            <PropertyRef Name="ApplyID" />
+            <PropertyRef Name="BuniessID" />
           </Key>
-          <Property Name="ApplyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuniessID" Type="nvarchar" MaxLength="12" Nullable="false" />
           <Property Name="BuniessType" Type="nvarchar" MaxLength="20" />
           <Property Name="BuniessContent" Type="nvarchar" MaxLength="1000" />
           <Property Name="IsCompleted" Type="int" />
@@ -557,19 +557,6 @@ FROM [dbo].[mdlPeblish] AS [mdlPeblish]</DefiningQuery>
           <Property Name="ActorId" Type="Int32" />
           <Property Name="UserPWD" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="tbBuniess">
-          <Key>
-            <PropertyRef Name="ApplyID" />
-          </Key>
-          <Property Name="ApplyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BuniessType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="BuniessContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="IsCompleted" Type="Int32" />
-          <Property Name="Updater" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ClientIP" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="tbCar">
           <Key>
             <PropertyRef Name="CarID" />
@@ -738,7 +725,6 @@ FROM [dbo].[mdlPeblish] AS [mdlPeblish]</DefiningQuery>
           <EntitySet Name="mtRfidCode" EntityType="Self.mtRfidCode" />
           <EntitySet Name="mtUniversalCode" EntityType="Self.mtUniversalCode" />
           <EntitySet Name="mtUser" EntityType="Self.mtUser" />
-          <EntitySet Name="tbBuniess" EntityType="Self.tbBuniess" />
           <EntitySet Name="tbCar" EntityType="Self.tbCar" />
           <EntitySet Name="tbFiles" EntityType="Self.tbFiles" />
           <EntitySet Name="tbIORecord" EntityType="Self.tbIORecord" />
@@ -782,6 +768,7 @@ FROM [dbo].[mdlPeblish] AS [mdlPeblish]</DefiningQuery>
             <End Role="tbApplyBill" EntitySet="tbApplyBill" />
             <End Role="tbConfirmState" EntitySet="tbConfirmState" />
           </AssociationSet>
+          <EntitySet Name="tbBuniess" EntityType="ajIIPdbModel.tbBuniess" />
         </EntityContainer>
         <EntityType Name="tbCheckInOut">
           <Key>
@@ -942,6 +929,19 @@ FROM [dbo].[mdlPeblish] AS [mdlPeblish]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tbBuniess">
+          <Key>
+            <PropertyRef Name="BuniessID" />
+          </Key>
+          <Property Name="BuniessID" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="BuniessType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BuniessContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IsCompleted" Type="Int32" />
+          <Property Name="Updater" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ClientIP" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1023,20 +1023,6 @@ FROM [dbo].[mdlPeblish] AS [mdlPeblish]</DefiningQuery>
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
                 <ScalarProperty Name="IsDel" ColumnName="IsDel" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbBuniess">
-            <EntityTypeMapping TypeName="ajIIPdbModel.tbBuniess">
-              <MappingFragment StoreEntitySet="tbBuniess">
-                <ScalarProperty Name="ApplyID" ColumnName="ApplyID" />
-                <ScalarProperty Name="BuniessType" ColumnName="BuniessType" />
-                <ScalarProperty Name="BuniessContent" ColumnName="BuniessContent" />
-                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
-                <ScalarProperty Name="Updater" ColumnName="Updater" />
-                <ScalarProperty Name="ClientIP" ColumnName="ClientIP" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
               </MappingFragment>
@@ -1302,6 +1288,20 @@ FROM [dbo].[mdlPeblish] AS [mdlPeblish]</DefiningQuery>
                 <ScalarProperty Name="UseType" ColumnName="UseType" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="TempID" ColumnName="TempID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbBuniess">
+            <EntityTypeMapping TypeName="ajIIPdbModel.tbBuniess">
+              <MappingFragment StoreEntitySet="tbBuniess">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ClientIP" ColumnName="ClientIP" />
+                <ScalarProperty Name="Updater" ColumnName="Updater" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="BuniessContent" ColumnName="BuniessContent" />
+                <ScalarProperty Name="BuniessType" ColumnName="BuniessType" />
+                <ScalarProperty Name="BuniessID" ColumnName="BuniessID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,0 +1,178 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .row, textarea {
+        margin-top: 1em;
+    }
+
+    .alert-dismissible {
+        display: inline-block;
+        padding-top: 0.3em;
+        padding-bottom: 0.55em;
+        margin-right: 0.3em;
+    }
+
+    .modal-content {
+        width: 20em;
+        margin-left: 45%;
+    }
+
+    .modal-body {
+        max-height: 50em;
+        overflow: auto;
+    }
+</style>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-6">
+                <select class="form-control">
+                    <option value="-1">请选择进出类型</option>
+                    <option value="0">进园申请</option>
+                    <option value="1">出园申请</option>
+                </select>
+            </div>
+            <div class="col-md-6  text-center">
+                <div class="input-group">
+                    <div class="input-group-addon">请选择时间:</div>
+                    <input type="text" id="DateTime" value="@DateTime.Now" datetimeold="@DateTime.Now" readonly class=" form_datetime form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <select class="form-control" id="leibie">
+                    <option value="-1">请选择申请类别</option>
+                    <option value="0">车辆临时申请</option>
+                    <option value="1">人员临时申请</option>
+                    <option value="2">重要物品临时申请</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" class="form-control" id="PeblishTitle" placeholder="请输入标题">
+                <textarea class="form-control" id="PublishContent" rows="6" placeholder="请输入内容"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label>PS:鼠标移到标签上面显示备注</label>
+            </div>
+            <div class="col-md-12" id="shuju">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="mdo" id="tj">+ 添加</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 text-center">
+        <button type="button" id="btnzong" class="btn btn-info">确认提交</button>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+@*添加待选列表*@
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">待选列表</h4>
+            </div>
+            <div class="modal-body" id="xiangxishuju">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary tianjia" data-dismiss="modal">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    //临时数据
+    var peoples = {
+        1: "张三", 2: "李四", 3: "李四", 4: "王五", 5: "赵六", 6: "田七", 7: "牌九"
+    };
+
+    var cars = {
+        1: "沪A11111", 2: "沪A22222", 3: "沪A33333", 4: "沪A44444", 5: "沪A55555", 6: "沪A66666", 7: "沪A77777"
+    };
+
+    var items = {
+        1: "物品1", 2: "物品2", 3: "物品3", 4: "物品4", 5: "物品5", 6: "物品6", 7: "物品7"
+    };
+
+    $("#tj").click(function () {
+        if ($("#leibie").val() == "-1") {
+            alert("请先选择申请类别");
+            return false;
+        }
+    })
+
+    $("#leibie").change(function () {
+        $("#xiangxishuju").empty();
+        var strs;
+        var TypeId = $(this).val();
+        if (TypeId == "1") {
+            strs = peoples;
+        } else if (TypeId == "0") {
+            strs = cars;
+        } else if (TypeId == "2") {
+            strs = items;
+        }
+        if (strs != null && strs != "") {
+            $.each(strs, function (key, val) {
+                $.each($("#shuju").find("strong"), function () {
+                    if ($(this).text() == val) {
+                        return false;
+                    }
+
+                })
+                $("#xiangxishuju").append('<div class="alert alert-info" role="alert"><strong>' + val + '</strong></div>');
+
+            })
+        }
+    })
+
+    $(".form_datetime").datetimepicker({ format: 'yyyy-mm-dd hh:ii' });
+
+
+    $(document).on('click', '.alert-info', function () {
+        $(this).siblings().remove();
+        $(this).parent().append('<textarea class="form-control" placeholder="请输入备注信息"></textarea>');
+    })
+
+
+
+    $(".tianjia").click(function () {
+        if ($(".modal-body").children().length == 2) {
+            var text = $(".modal-body").find("strong").text();
+            var content = $(".modal-body").find("textarea").val();
+
+            var str = '<div class="alert alert-info alert-dismissible" role="alert"';
+            if (content != null) {
+                str += ' data-toggle="tooltip" data-placement="bottom" title="' + content + '">';
+            } else {
+                str += '>';
+            }
+            str += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            '<strong>' + text + '</strong>' +
+            ' </div>';
+
+            $("#shuju").append(str);
+        }
+    })
+    //获取url参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
+
+</script>

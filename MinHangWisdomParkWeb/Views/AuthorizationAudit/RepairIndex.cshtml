@@ -103,7 +103,6 @@
                         </div>
                         <button type="button" class="btn btn-danger queren" tag="0">不通过</button>
                         <button type="button" class="btn btn-primary queren" tag="1">通&nbsp;&nbsp;&nbsp;&nbsp;过</button>
-
                     </div>
                 </div>
             </div>
@@ -154,10 +153,11 @@
         var applyid = $(this).parent().attr("tag");
         var content = $(this).parent().find("textarea").val();
         var bools = $(this).attr("tag");
-        $.post("ShenHe", { applyid: applyid, content: content, bools: bools }, function (data,status) {
+        $.post("ShenHe", { applyid: applyid, content: content, bools: bools }, function (data, status) {
             if (status == "success") {
                 if (data.msg == "ok") {
                     alert("审核成功！");
+                    location.reload();
 
                 } else {
                     alert("审核失败！");

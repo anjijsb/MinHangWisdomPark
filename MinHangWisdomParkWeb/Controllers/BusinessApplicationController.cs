@@ -98,6 +98,7 @@ namespace MinHangWisdomParkWeb.Controllers
             }
         }
 
+
         /// <summary>
         /// 插入repair表数据
         /// </summary>
@@ -112,7 +113,6 @@ namespace MinHangWisdomParkWeb.Controllers
 
 
         #endregion
-
 
         #region  状态
 
@@ -157,8 +157,7 @@ namespace MinHangWisdomParkWeb.Controllers
 
         #endregion
 
-
-        #region
+        #region 出入园申请
 
         /// <summary>
         /// 离入园申请
@@ -166,10 +165,17 @@ namespace MinHangWisdomParkWeb.Controllers
         /// <param name="Type"></param>
         /// <param name="Title"></param>
         /// <returns></returns>
-        public ActionResult CarsAndItems(string Type, string Title)
+        public ActionResult CarsAndItems(string Type, string Title, string Typeid)
         {
-            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Title))
+            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Typeid))
             {
+                switch (Typeid)
+                {
+                    case "1": ViewBag.TypeId = "车 牌 号"; break;
+                    case "2": ViewBag.TypeId = "物品名称"; break;
+                    case "3": ViewBag.TypeId = "姓    名"; break;
+                }
+
                 ViewBag.Type = Type.Replace("申请", "");
                 ViewBag.Title = Title;
             }
@@ -206,6 +212,8 @@ namespace MinHangWisdomParkWeb.Controllers
             }
         }
 
+
+
         /// <summary>
         /// 插入CheckInOut表
         /// </summary>
@@ -236,6 +244,63 @@ namespace MinHangWisdomParkWeb.Controllers
         }
 
         #endregion
+
+        #region 临时出入园申请
+
+        public ActionResult Linshi(string Type, string Title)
+        {
+            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Title))
+            {
+                ViewBag.Type = Type.Replace("申请", "");
+                ViewBag.Title = Title;
+            }
+            return View();
+        }
+
+        #endregion
+
+        #region 证卡挂失申请
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Type"></param>
+        /// <param name="Title"></param>
+        /// <returns></returns>
+        public ActionResult guashi(string Type, string Title)
+        {
+            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Title))
+            {
+                ViewBag.Type = Type.Replace("申请", "");
+                ViewBag.Title = Title;
+            }
+            return View();
+        }
+
+        #endregion
+
+        #region  人员制卡申请
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Type"></param>
+        /// <param name="Title"></param>
+        /// <returns></returns>
+        public ActionResult renyuan(string Type, string Title)
+        {
+            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Title))
+            {
+                ViewBag.Type = Type.Replace("申请", "");
+                ViewBag.Title = Title;
+            }
+            return View();
+        }
+
+        #endregion
+
 
         #endregion
     }

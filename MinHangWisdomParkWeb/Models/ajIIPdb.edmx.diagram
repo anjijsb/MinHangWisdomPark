@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2d3e5dd514a64ae7a297b08a5ef86a52" Name="Diagram1" ZoomLevel="111">
+      <Diagram DiagramId="2d3e5dd514a64ae7a297b08a5ef86a52" Name="Diagram1" ZoomLevel="106">
         <EntityTypeShape EntityType="ajIIPdbModel.Functions" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.mtFunction" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.mtOwner" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="ajIIPdbModel.mtRfidCode" Width="1.5" PointX="3.75" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.mtUniversalCode" Width="1.5" PointX="7.875" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.mtUser" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ajIIPdbModel.tbBuniess" Width="1.5" PointX="10.5" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.tbCar" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.tbFiles" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ajIIPdbModel.tbIORecord" Width="1.5" PointX="6" PointY="7.875" IsExpanded="true" />
@@ -38,6 +37,7 @@
         <EntityTypeShape EntityType="ajIIPdbModel.tbApplyBill" Width="1.5" PointX="8.5" PointY="16.25" />
         <EntityTypeShape EntityType="ajIIPdbModel.tbTemp" Width="1.5" PointX="15.375" PointY="9.75" />
         <AssociationConnector Association="ajIIPdbModel.FK_tbConfirmState_tbApplyBill" />
+        <EntityTypeShape EntityType="ajIIPdbModel.tbBuniess" Width="1.5" PointX="15.375" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

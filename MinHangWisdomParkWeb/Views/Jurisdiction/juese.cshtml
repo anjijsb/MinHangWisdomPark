@@ -1,0 +1,253 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-6">
+                <select class="form-control" id="select">
+                    <option>请选择角色</option>
+                    <option>管理员</option>
+                    <option>工头</option>
+                    <option>项目经理</option>
+                    <option>园区主管</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">+ 添加角色</button>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:2em;display:none;" id="rowcont">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" id="conte">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree1">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree1" aria-expanded="false" aria-controls="collapseThree">
+                                信息发布中心
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <input type="checkbox" value="" checked="checked" disabled="disabled">园区公告发布管理  <input type="checkbox" value="" checked="checked" disabled="disabled">新闻信息发布管理  <br />
+                            <input type="checkbox" value="" checked="checked" disabled="disabled">广告信息发布管理   <input type="checkbox" value="" checked="checked" disabled="disabled">政策信息发布管理
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree2">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree2" aria-expanded="false" aria-controls="collapseThree">
+                                业务在线申请
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree2" class="panel-collapse collapse in " role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <input type="checkbox" value="" checked="checked" disabled="disabled">人员制卡申请  <input type="checkbox" value="" checked="checked" disabled="disabled">证卡在线挂失申请  <br />
+                            <input type="checkbox" value="" checked="checked" disabled="disabled">网上报修申请   <input type="checkbox" value="" disabled="disabled">人员出入园申请<br />
+                            <input type="checkbox" value="" disabled="disabled">车辆出入园申请 <input type="checkbox" value="" disabled="disabled">重要物品出入园申请  <br />
+                            <input type="checkbox" value="" disabled="disabled">临时出入园申请
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree3">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree3" aria-expanded="false" aria-controls="collapseThree">
+                                授权审核管理
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree3" class="panel-collapse collapse in " role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <input type="checkbox" value="" disabled="disabled">业务申请授权  <input type="checkbox" value="" disabled="disabled">维修申请受理  <br />
+                            <input type="checkbox" value="" checked="checked" disabled="disabled">信息发布授权
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree4">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree4" aria-expanded="false" aria-controls="collapseThree">
+                                运营收入管理
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree4" class="panel-collapse collapse  in" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <input type="checkbox" value="" checked="checked" disabled="disabled">卡证发行管理  <input type="checkbox" value="" disabled="disabled">广告收入管理  <br />
+                            <input type="checkbox" value="" disabled="disabled">服务收入管理
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree5">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree5" aria-expanded="false" aria-controls="collapseThree">
+                                数据统计分析
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree5" class="panel-collapse collapse in " role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <input type="checkbox" value="" checked="checked" disabled="disabled">运营收入  <input type="checkbox" value="" checked="checked" disabled="disabled">流量监控  <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<div class="row " style="display:none;" id="anniu">
+    <div class="col-md-2"></div>
+    <div class="col-md-2"></div>
+    <div class="col-md-2 text-center">
+        <button type="button" class="btn btn-danger">编辑</button>
+    </div>
+    <div class="col-md-2 text-center">
+        <button type="button" class="btn btn-info">保存</button>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-2"></div>
+</div>
+
+
+
+
+
+
+
+
+<!-- 角色添加弹出层 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">添加权限</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <div class="input-group-addon">角色名称:</div>
+                            <input type="text" class="form-control" id="name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:2em;">
+                    <div class="col-md-12">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingThree11">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree11" aria-expanded="false" aria-controls="collapseThree">
+                                            信息发布中心
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree11" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="panel-body">
+                                        <input type="checkbox" value="">园区公告发布管理  <input type="checkbox" value="">新闻信息发布管理  <br />
+                                        <input type="checkbox" value="">广告信息发布管理   <input type="checkbox" value="">政策信息发布管理
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingThree22">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree22" aria-expanded="false" aria-controls="collapseThree">
+                                            业务在线申请
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree22" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="panel-body">
+                                        <input type="checkbox" value="">人员制卡申请  <input type="checkbox" value="">证卡在线挂失申请  <br />
+                                        <input type="checkbox" value="">网上报修申请   <input type="checkbox" value="">人员出入园申请<br />
+                                        <input type="checkbox" value="">车辆出入园申请 <input type="checkbox" value="">重要物品出入园申请  <br />
+                                        <input type="checkbox" value="">临时出入园申请
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingThree33">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree33" aria-expanded="false" aria-controls="collapseThree">
+                                            授权审核管理
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree33" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="panel-body">
+                                        <input type="checkbox" value="">业务申请授权  <input type="checkbox" value="">维修申请受理  <br />
+                                        <input type="checkbox" value="">信息发布授权
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingThree44">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree44" aria-expanded="false" aria-controls="collapseThree">
+                                            运营收入管理
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree44" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="panel-body">
+                                        <input type="checkbox" value="">卡证发行管理  <input type="checkbox" value="">广告收入管理  <br />
+                                        <input type="checkbox" value="">服务收入管理
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingThree55">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree55" aria-expanded="false" aria-controls="collapseThree">
+                                            数据统计分析
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree55" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="panel-body">
+                                        <input type="checkbox" value="">运营收入  <input type="checkbox" value="">流量监控  <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">确认添加</button>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(".btn-danger").click(function () {
+
+    })
+
+    $("#select").change(function () {
+        if ($(this).val() == "请选择角色") {
+            $("#rowcont").hide();
+            $("#anniu").hide();
+        } else {
+            $("#rowcont").show();
+            $("#anniu").show();
+        }
+    })
+
+</script>
